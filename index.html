@@ -5,7 +5,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>大宁国际商业广场</title>
     <meta name="author" content="disen.">
     <meta property="wb:webmaster" content="e18061fd3a93725f" />
     <meta property="og:url" content="/">
@@ -20,6 +20,8 @@
     <meta http-equiv="pragma" content="no-cache" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <script type="text/javascript" src="js/jquery-1.10.1.min.js"></script>
+    <script type="text/javascript" src="js/audio.js"></script>
+
     <link rel="stylesheet" href="css/style.css" />
 </head>
 
@@ -27,21 +29,21 @@
 	<div id="page1" style="width:100%;height:100%">
 		<div class="sy-bj">
 			<div style="text-align:center">
-				<div style="padding-top:10px;color:#666;font-size:20px">戴佩妮</div>
-				<div style="padding-top:10px;color:#666;font-size:15px">移动</div>
+				<div style="padding-top:5px;color:#666;font-size:18px;font-weight:bold">戴佩妮</div>
+				<div style="padding-top:2px;color:#666;font-size:13px">移动</div>
 			</div>
-			<div style="margin-top:50%;width:20%;text-align:center;float:left">
+			<div style="margin-top:50%;width:40%;text-align:center;float:left">
 				<div class="sy-txw">
 				</div>
-				<div style="margin-top:7px;color:#888">
+				<div style="margin-top:7px;color:#999;font-size:13px">
 					提醒我
 				</div>
 			</div>
 
-			<div style="margin-top:50%;width:20%;text-align:center;float:right">
+			<div style="margin-top:50%;width:40%;text-align:center;float:right">
 				<div class="sy-xinxi">
 				</div>
-				<div style="margin-top:7px;color:#888">
+				<div style="margin-top:7px;color:#999;font-size:13px">
 					信息
 				</div>
 			</div>
@@ -49,34 +51,44 @@
 			<div>
 			</div>
 
-			<div style="margin-top:90%;height:60px;text-align:center;width:100%">
-				<div style="width:60%;border-radius:30px;background-color:rgba(84,60,46,0.58);height:100%;margin:auto;position:relative">
-					<div class="sy-phone" style="width:50px;height:50px;border-radius:40px;background-color:rgba(255,255,255,1);position:absolute;top:5px;left:5px">
+			<div style="position:absolute;bottom:80px;height:60px;text-align:center;width:100%">
+				<div style="width:70%;border-radius:30px;background-color:rgba(84,60,46,0.58);height:100%;margin:auto;position:relative">
+					<div class="sy-phone" style="width:50px;height:50px;border-radius:40px;background-color:rgba(255,255,255,1);position:absolute;top:5px;left:5px;z-index:10">
 					</div>
-					<div class="sy-hdjt" id='hdjt' style="line-height:60px;color:#666">
-					滑动来接听
+					<div id='hdjt' style="line-height:60px;color:#666">
+						<span  class="sy-hdjt" style="line-height:60px;color:#666">
+						滑动来接听
+						</span>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 
-	<div id="page2"  style="width:100%;height:100%;background-color:rgba(0,0,0,0.75)">
-		<div style="text-align:center">
-			<div style="padding-top:30px;color:#fff;font-size:20px">戴佩妮</div>
-			<div style="padding-top:10px;color:#fff;font-size:15px">00:01</div>
-		</div>
-		<div class='thbk' >
-			
-		</div>
+	<div id="page2"    style="width:100%;height:100%;display:none">
+		<div class="sy-bj" style="width:100%;height:100%;position:absolute;top:0px;left:0px;-webkit-filter:blur(3px)">
 
-		<div class="sy-gd" id="sygd" style="width:50px;height:50px;border-radius:40px;background-color:#fc3c36;">
+		</div>
+		<div style="width:100%;height:100%;background-color:rgba(0,0,0,0.75);position:absolute;top:0px;left:0px">
+			<div style="text-align:center">
+				<div style="padding-top:30px;color:#fff;font-size:20px">戴佩妮</div>
+				<div style="padding-top:10px;color:#fff;font-size:15px" id="timespan">00:00</div>
+			</div>
+			<div class='thbk' >
+				
+			</div>
+
+			<div class="sy-gd" id="sygd" style="width:50px;height:50px;border-radius:40px;background-color:#fc3c36;">
+			</div>
 		</div>
 	</div>
 
 	<div id="page3"  style="width:100%;height:100%;background-color:rgba(0,0,0,0.75)">
 		<div class="sy-p3" style="text-align:center;position:relative">
-			<button id='qpbutton' style="margin:auto;position:absolute;bottom:100px;left:30%;width:40%">
+			<div id='jsbutton' style="margin:auto;position:absolute;top:3px;left:3px;width:50px;height:50px">
+			
+			</div>
+			<button id='qpbutton' style="margin:auto;position:absolute;bottom:60px;left:30%;width:40%">
 			我要抢票
 			</button>
 		</div>
@@ -92,20 +104,122 @@
 			<div class='fctext'>回复关键词“抢票”</div>
 			<div class='fctext'>即刻开始抢票~</div>
 	</div>
+
+	<div id="introduce" style="overflow:auto;width:100%;position:relative">
+	    <img id="myimg" style="width:100%;" src="images/introduce.jpg">
+	    <button id='closebutton'  style="position:absolute;left:30%;width:40%; background-color: #7366c5;">
+	    关闭
+	    </button>
+    </div>
 </body>
 <script type="text/javascript">
+	var start= 0;
+	
+	var dis = 5;
+	var end = dis;
+	var interval;
+	var timenum = 0;
+	var interval2;
+	var touchmove = false;
+	function getTimeString(seconds){
+		var min = parseInt(seconds/60);
+		var sec = seconds-min*60;
+		if(min<10){
+			if(sec<10){
+				return "0"+min+":"+"0"+sec;
+			}else{
+				return "0"+min+":"+sec;
+			}
+		}else{
+			if(sec<10){
+				return min+":"+"0"+sec;
+			}else{
+				return min+":"+sec;
+			}
+		}
+	}
+
+	function playMp3(url){
+
+		g_audio.elems["id"] ="asdsds";
+		g_audio.push({song_id:"asdsds",song_fileUrl:url});
+		g_audio.touchstart = false;
+		
+		g_audio.play();
+	}
+document.addEventListener('touchmove', function (e) {e.preventDefault(); },false);
+
 	$(document).ready(function(){
-		$("#hdjt").click(function(){
-			$("#page1").hide();
-			$("#page2").show();
+		playMp3("mp3/zy.mp3");
+		g_audio.loop = "loop";
+
+		var e = $(".sy-phone").get(0);
+		e.addEventListener('touchstart', function(event) {
+		
 		});
+
+		$("#qpfc").click(function(){
+			$("#qpfc").css("opacity","0");
+			window.setTimeout(function(){$("#qpfc").hide();},600);
+		});
+
+		e.addEventListener('touchmove', function(event) {
+			if(!touchmove){
+				touchmove = !touchmove;
+				$(".sy-phone").css("left",$(".sy-phone").parent().width()-"60");
+				//$(".sy-phone").css("left","auto");
+				interval2 = window.setTimeout(function(){
+					$("#page1").hide();
+					$("#page2").show();
+					g_audio.loop = false;
+					playMp3("mp3/ldxs.mp3");
+
+					g_audio.addEventListener("ended", function(){
+						window.clearInterval(interval2);
+						$("#sygd").click();
+					});
+					interval2 = window.setInterval(function(){
+						timenum = timenum+1;
+						$("#timespan").html(getTimeString(timenum));
+					},1000);
+
+				},1000);
+			}else{
+				return;
+			}
+		});
+
+		$("#jsbutton").click(function(){
+			//$("#page3").hide();
+			//$("#introduce").show();
+			
+			window.open("introduce.html");
+		});
+
 		$("#sygd").click(function(){
+			g_audio.pause();
 			$("#page2").hide();
 			$("#page3").show();
 		});
 		$("#qpbutton").click(function(){
 			$("#qpfc").show();
+			$("#qpfc").css("opacity","1");
 		});
+		interval = window.setInterval(function(){
+			
+			end = start+dis;
+			var s = start+"%";
+			var e = end+"%";
+			$(".sy-hdjt").css("background-image","-webkit-linear-gradient(left,#666,#ffdddd "+s+",#ffdddd "+e+",#666)");
+			start = start + dis;
+			if(start>100){
+				$(".sy-hdjt").css("background-image","-webkit-linear-gradient(left,#666,#666)");
+				start = 0;
+				
+				// window.clearInterval(interval);
+				// return;
+			}
+		},50);
 	})
 </script>
 
