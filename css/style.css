@@ -1,0 +1,98 @@
+*{
+	font-family: '微软雅黑';
+}
+body{
+	margin:0px;
+	padding: 0px;
+}
+.sy-bj{
+	height: 100%;
+	width: 100%;
+	background-image: url('../images/daipeini.jpg');
+	background-repeat: no-repeat;
+	background-size: 100% ;
+}
+
+button{
+	height: 40px;
+	width: 200px;
+	background-color: #7366c5;
+	text-align: center;
+	color: #fff;
+	line-height: 40px;
+	font-size: 20px;
+	border:0px;
+	font-weight: bold;
+
+}
+
+.sy-p3{
+	height: 100%;
+	width: 100%;
+	background-image: url('../images/gzyd.jpg');
+	background-repeat: no-repeat;
+	background-size: 100% ;
+}
+
+.sy-txw{
+	background-image: url('../images/icon1.png');
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: auto 100%;
+	height: 20px;
+
+}
+
+.allCenter{
+	display: box;
+	display: -webkit-box;
+	display: -moz-box;
+	-webkit-box-pack:center;
+	-moz-box-pack:center;
+	-webkit-box-align:center;
+	-moz-box-align:center;
+}
+
+.sy-xinxi{
+	background-image: url('../images/icon2.png');
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: auto 100%;
+	height: 20px;
+}
+
+.sy-phone{
+	background-image: url('../images/icon3.png');
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: 30px 30px;
+
+}
+.sy-hdjt{
+
+     background-image: -webkit-gradient(linear, 0 0, 0 bottom, from(rgba(0, 128, 0, 1)), to(rgba(51, 51, 51, 1)));
+      -webkit-background-clip: text;
+     -webkit-text-fill-color: transparent;
+}
+.thbk{
+	background-image: url('../images/thbk.png');
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: 100% ;
+	width: 80%;
+	height: 50%;
+	margin: auto;
+}
+.sy-gd{
+	background-image: url('../images/icon4.png');
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: 38px 13px;
+	margin: auto;
+}
+.fctext{
+	color: #fff;
+	text-align: center;
+	height: 30px;
+	line-height: 30px;
+}

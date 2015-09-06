@@ -1,0 +1,19 @@
+{
+  "name": "dnyyj",
+  "version": "0.0.0",
+  "authors": [
+    "dulin <dulin@rongyi.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "jQuery-SlotMachine": "https://github.com/josex2r/jQuery-SlotMachine.git#~2.1.0",
+    "remodal": "https://github.com/VodkaBears/Remodal.git#~1.0.3"
+  }
+}

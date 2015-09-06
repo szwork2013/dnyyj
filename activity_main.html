@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+<head>
+	<title>活动主页面</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<style>
+	body, p{
+		margin: 0;
+		padding: 0;
+	}
+
+	a{
+		text-decoration: none;
+	}
+
+	html,body {
+		width: 100%;
+		height: 100%;
+		min-width: 320px;
+		overflow: hidden;
+		font-family: Microsoft Yahei;
+	}
+
+
+	.activity-main-container{
+		position: relative;
+		height: 100%;
+		background: url(images/bg0.jpg) no-repeat;
+		background-size: 100%;
+	}
+
+	.activity-main-btn-group{
+		position: absolute;
+		left: 37px;
+		right: 37px;
+		top: 368px;
+	}
+
+	.activity-main-btn-group > span{
+		position: relative;
+		display: block;
+		margin-top: 10px;
+		overflow: hidden;
+	}
+
+	.activity-main-btn-group > span > a:first-child{
+		margin-right: 4%;
+	}
+
+	.btn{
+		color: #fff;
+		text-align: center;
+		-webkit-tap-highlight-color: transparent;
+	}
+
+	.btn-s{
+		float:left;
+		width: 48%;
+		padding: 10px 0;
+	}
+
+	.btn-m{
+		display: block;
+		padding: 10px 0;
+	}
+
+	.btn-pink{
+		background-color: #ff30a4;
+	}
+	.btn-pink:active{
+		background-color: #e22790;
+	}
+	.btn-purple{
+		background-color: #7466c5;
+	}
+	.btn-purple:active{
+		background-color: #5a4f99;
+	}
+
+	</style>
+</head>
+<body>
+	<div class="activity-main-container">
+		<div class="activity-main-btn-group">
+			<a class="btn btn-m btn-pink" href="./activity_form.html">我要抢票</a>
+			<span>
+				<a class="btn btn-s btn-purple" href="#">我的门票</a>
+				<a class="btn btn-s btn-purple" href="#">活动细则</a>
+			</span>
+		</div>
+	</div>
+</body>
+</html>

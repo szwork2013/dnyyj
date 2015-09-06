@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+
+<head>
+    <title>抽奖页面</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+    body,
+    p,
+    ul,
+    h3 {
+        margin: 0;
+        padding: 0;
+    }
+
+    html,
+    body {
+        width: 100%;
+        height: 100%;
+        min-width: 320px;
+        overflow: hidden;
+        font-family: Microsoft Yahei;
+    }
+
+    body {
+        background: url(images/bg3.jpg) no-repeat;
+        background-size: 100%;
+    }
+
+    ul {
+        list-style-type: none;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    .activity_intro {
+        display: table;
+        float: right;
+        width: 60px;
+        height: 60px;
+        margin-right: 10px;
+        background-color: #ff30a4;
+        color: #fff;
+        border-radius: 50%;
+        text-align: center;
+    }
+
+    .activity_intro > p {
+        display: table-cell;
+        vertical-align: middle;
+    }
+
+    header {
+        padding-top: 80px;
+        overflow: hidden;
+    }
+
+    .activity_sct {
+        text-align: center;
+        padding: 0 10px;
+    }
+
+    .activity_sct > h3 {
+        color: #7466c5;
+        font-weight: normal;
+        margin-bottom: 10px;
+    }
+
+    .activity_list > li {
+        float: left;
+        width: 45%;
+        height: 50px;
+        margin-right: 10%;
+        margin-bottom: 10px;
+        background-color: #7466c5;
+    }
+
+    .activity_list > li:nth-child(2n) {
+        margin-right: 0;
+    }
+
+    .activity_list > li > p {
+        color: #fff;
+        line-height: 25px;
+        font-size: 18px;
+    }
+
+    .activity_lottery {
+        padding: 0 10px;
+    }
+
+    .clearfix:after {
+        content: '';
+        display: block;
+        height: 0;
+        visibility: hidden;
+        clear: both;
+    }
+
+    .activity-lottery-machine {
+        position: relative;
+        padding: 0 10px;
+    }
+
+    .activity-lottery-machine > img {
+        max-width: 100%;
+    }
+
+    .btn {
+        float: left;
+        width: 48%;
+        height: 40px;
+        line-height: 40px;
+        background-color: #ff30a4;
+        color: #fff;
+        text-align: center;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    .btn:active{
+        background-color: #e22790;
+    }
+
+    .btn:nth-child(1) {
+        margin-right: 4%;
+    }
+
+    .activity-lottery-btn-group {
+        margin-top: 10px;
+    }
+
+    .activity-machine-container{
+    	position: absolute;
+    	top: 30px;
+    	bottom: 0;
+    	left: 36px;
+    	right: 20px;
+    	z-index: 100;
+    }
+
+    .slotMachine {
+        float: left;
+        width: 24%;
+        height: 90%;
+        padding: 0px;
+        overflow: hidden;
+        text-align: center;
+        background: url(images/icon-machine-square.png) no-repeat;
+        background-size: 100%;
+    }
+
+    .slotMachine:not(:last-child) {
+		margin-right: 10%;
+    }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="activity_intro">
+            <p>活动<br/>细则</p>
+        </div>
+    </header>
+    <section class="activity_sct">
+        <h3>请选择场次</h3>
+        <ul class="activity_list clearfix">
+            <li>
+                <P>戴佩妮</P>
+                <P>10月17日</P>
+            </li>
+            <li>
+                <p>EXIT</p>
+                <p>10月18日</p>
+            </li>
+            <li>
+                <p style="font-size:14px;">安来宁/甜品店/昆曲</p>
+                <p>10月24日</p>
+            </li>
+            <li>
+                <p>熊天平</p>
+                <p>10月25日</p>
+            </li>
+        </ul>
+    </section>
+    <section class="activity_lottery">
+        <div class="activity-lottery-machine">
+            <img src="images/slot-machine-main.png" alt="抽奖">
+            <div class="activity-machine-container">
+                <div id="machine1" class="slotMachine">
+                    <div class="slot slot1"></div>
+                    <div class="slot slot2"></div>
+                    <div class="slot slot3"></div>
+                    <div class="slot slot4"></div>
+                    <div class="slot slot5"></div>
+                    <div class="slot slot6"></div>
+                </div>
+                <div id="machine2" class="slotMachine">
+                    <div class="slot slot1"></div>
+                    <div class="slot slot2"></div>
+                    <div class="slot slot3"></div>
+                    <div class="slot slot4"></div>
+                    <div class="slot slot5"></div>
+                    <div class="slot slot6"></div>
+                </div>
+                <div id="machine3" class="slotMachine">
+                    <div class="slot slot1"></div>
+                    <div class="slot slot2"></div>
+                    <div class="slot slot3"></div>
+                    <div class="slot slot4"></div>
+                    <div class="slot slot5"></div>
+                    <div class="slot slot6"></div>
+                </div>
+            </div>
+        </div>
+        <div class="activity-lottery-btn-group clearfix">
+            <a class="btn">继续抽奖</a>
+            <a class="btn" href="#">我的门票</a>
+        </div>
+    </section>
+</body>
+
+</html>

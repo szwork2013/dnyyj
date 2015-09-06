@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+
+<head>
+    <title>活动信息输入</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    html,
+    body {
+        width: 100%;
+        height: 100%;
+        min-width: 320px;
+        overflow: hidden;
+        font-family: Microsoft Yahei;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    body {
+        background: url(images/bg2.jpg) no-repeat;
+        background-size: 100%;
+    }
+
+    input {
+        font-family: Microsoft Yahei;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+    form {
+        padding-top: 240px;
+    }
+
+    fieldset,
+    input {
+        border: none;
+    }
+
+    legend {
+        color: #ff30a4;
+        font-size: 14px;
+    }
+
+    button{
+        border: none;
+        outline: none;
+        font-family: Microsoft Yahei;
+    }
+
+    .submit-btn {
+        display: block;
+        width: 100%;
+        height: 40px;
+        line-height: 40px;
+        background-color: #ff30a4;
+        color: #fff;
+        font-size: 16px;
+        text-align: center;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    .submit-btn:active {
+        background-color: #e22790;
+        outline: none;
+    }
+
+    fieldset > div {
+        position: relative;
+        height: 40px;
+        margin-bottom: 10px;
+        border: 1px solid #babad4;
+        border-radius: 5px;
+        opacity: 0.8;
+    }
+
+    fieldset > div > span {
+        position: absolute;
+        right: 0;
+        left: 60px;
+        height: 100%;
+    }
+
+    fieldset > div:nth-of-type(2) > span {
+        right: 80px;
+    }
+
+    fieldset > div > span > input {
+        width: 100%;
+        height: 100%;
+        padding-left: 10px;
+        padding-right: 10px;
+        border-left: 1px solid #babad4;
+    }
+
+    fieldset > div > label {
+        position: absolute;
+        left: 0;
+        width: 60px;
+        height: 100%;
+        background-color: #fff;
+    }
+
+    .icon{
+        position: absolute;
+        margin: auto;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+    }
+
+    .icon-user{
+        background: url(images/icon-user.png) no-repeat;
+        background-size: 30px;
+    }
+
+    .icon-phone{
+        background: url(images/icon-phone.png) no-repeat center;
+        background-size: 20px;
+    }
+
+    .icon-cycle{
+        background-color: #ff30a4;
+        border-radius: 50%;
+        color: #fff;
+        font-size: 12px;
+        font-style: normal;
+        text-align: center;
+    }
+    .security-code-btn{
+        position: absolute;
+        right: 0;
+        width:80px;
+        height: 100%;
+        background-color: #ff30a4;
+        color: #fff;
+    }
+    .security-code-btn.active{
+        background-color: #777576;
+    }
+    .security-code-btn:active{
+        background-color: #e22790;
+    }
+    </style>
+</head>
+
+<body>
+    <form id="user-info-form">
+        <fieldset>
+            <legend>输入个人信息，马上与TA面对面！</legend>
+            <div>
+                <label for="user-name">
+                    <i class="icon icon-user"></i>
+                </label>
+                <span>
+                <input id="user-name" type="text" placeholder="请输入您的姓名">
+                </span>
+            </div>
+            <div>
+                <label for="user-phone-num">
+                    <i class="icon icon-phone"></i>
+                </label>
+                <span>
+                    <input id="user-phone-num" type="text" placeholder="请输入您的手机号">
+                </span>
+                <button id="security-code-btn" class="security-code-btn">获取验证码</button>
+            </div>
+            <div>
+                <label for="security-code">
+                    <i class="icon icon-cycle">123</i>
+                </label>
+                <span>
+                <input id="security-code" type="text" placeholder="请输入您的验证码">
+                </span>
+            </div>
+            <a id="rob-ticket-submit" class="submit-btn" href="./activity_lottery.html">开始抢票</a>
+        </fieldset>
+    </form>
+</body>
+<script src="js/jquery-1.10.1.min.js"></script>
+<script>
+    $(function() {
+        $('#rob-ticket-submit').click(function(e) {
+            var userName = $.trim($('#user-name').val()),
+                userPhoneNum = $.trim($('#user-phone-num').val()),
+                securityCode = $.trim($('#security-code').val());
+
+            var userNameReg = /^[\u4e00-\u9fa5a-zA-Z]{2,}$/,
+                userPhoneNumReg = /^1\d{10}$/,
+                securityCodeReg = /^\d{6}$/;
+
+            window.location.href = './activity_lottery.html';
+
+            if(!userName.length) {
+                alert('请输入您的姓名');
+                return false;
+            } else if (!userNameReg.test(userName)) {
+                alert('姓名格式不正确，最少2个中文或英文字符');
+                return false;
+            } else if (!userPhoneNum.length) {
+                alert('请输入您的手机号');
+                return false;
+            } else if (!userPhoneNumReg.test(userPhoneNum)) {
+                alert('手机号格式不正确，请检查');
+                return false;
+            } else if (!securityCode.length) {
+                alert('请输入您的验证码');
+                return false;
+            } else if(!securityCodeReg.test(securityCode)) {
+                alert('验证码格式不正确，6位数字，请检查');
+                return false;
+            } else {
+                $('#user-info-form').submit();
+            }
+
+        });
+
+        $('#security-code-btn').click(function(e) {
+            var $securityCodeBtn = $(this),
+                second = 10;
+
+            $securityCodeBtn.addClass('active')
+                            .attr('disabled', 'disabled')
+                            .text(second + 's');
+
+            var timer = setInterval(function() {
+                second--;
+                $securityCodeBtn.text(second + 's');
+                if(!second) {
+                    $securityCodeBtn.removeAttr('disabled')
+                                    .removeClass('active')
+                                    .text('获取验证码');
+                    clearInterval(timer);
+                }
+            }, 1000);
+
+        });
+    });
+</script>
+</html>
