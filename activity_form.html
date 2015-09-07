@@ -192,16 +192,77 @@
 <script src="js/jquery-1.10.1.min.js"></script>
 <script>
     $(function() {
+
+        var userNameReg = /^[\u4e00-\u9fa5a-zA-Z]{2,}$/,
+            userPhoneNumReg = /^1\d{10}$/,
+            securityCodeReg = /^\d{6}$/;
+
+
+        var openid = 'abcdefghijkmlnopqrstuvwxyz12';
+
+        var service = {
+
+            baseUrl: '',
+            getSecurityCodeUrl: 'http://h5.a.rongyi.com/pactivity/ticket/web/index.php?r=weixin%2Fcode',
+            startRobTicketUrl: 'http://h5.a.rongyi.com/pactivity/ticket/web/index.php?r=weixin%2Fregister',
+
+            ajax: function(opts) {
+                var data = opts.data,
+                    onBefore = opts.onBefore,
+                    onSuccess = opts.onSuccess,
+                    onError = opts.onError,
+                    url = opts.url;
+
+                $.ajax({
+                    url: ,
+                    type: 'POST',
+                    traditional: false,
+                    dataType: 'json',
+                    data: data,
+                    beforeSend: function() {
+                        onBefore.call(this);
+                    }.bind(this),
+                    success:function(data, textStatus, jqXHR) {
+                        if(typeof onSuccess === 'function') {
+                            onSuccess.call(this, data, textStatus, jqXHR);
+                        }
+                    }.bind(this),
+                    error: function(jqXHR, textStatus, error) {
+                        if(typeof onError === 'function') {
+                            onError.call(this, jqXHR, textStatus, error);
+                        }
+                    }.bind(this)
+                });
+            },
+
+            getSecurityCode: function(data, onBefore, onSuccess, onError) {
+                service.ajax({
+                    url: service.getSecurityCodeUrl,
+                    data: data,
+                    onBefore: onBefore,
+                    onSuccess: onSuccess,
+                    onError: onError
+                });
+            },
+
+            startRobTicket: function(data, onBefore, onSuccess, onError) {
+                service.ajax({
+                    url: service.startRobTicketUrl,
+                    data: data,
+                    onBefore: onBefore,
+                    onSuccess: onSuccess,
+                    onError: onError
+                });
+            }
+        };
+
+
         $('#rob-ticket-submit').click(function(e) {
             var userName = $.trim($('#user-name').val()),
                 userPhoneNum = $.trim($('#user-phone-num').val()),
                 securityCode = $.trim($('#security-code').val());
 
-            var userNameReg = /^[\u4e00-\u9fa5a-zA-Z]{2,}$/,
-                userPhoneNumReg = /^1\d{10}$/,
-                securityCodeReg = /^\d{6}$/;
-
-            window.location.href = './activity_lottery.html';
+            // window.location.href = './activity_lottery.html';
 
             if(!userName.length) {
                 alert('请输入您的姓名');
@@ -222,30 +283,58 @@
                 alert('验证码格式不正确，6位数字，请检查');
                 return false;
             } else {
-                $('#user-info-form').submit();
+                service.startRobTicket({
+                    wu_phone: userPhoneNum,
+                    wu_name: userName,
+                    wu_openid: openid,
+                    wu_code: securityCode
+                }, function() {
+
+                }, function(data, textStatus, jqXHR) {
+
+                }, function(jqXHR, textStatus, error) {
+
+                });
             }
 
         });
 
         $('#security-code-btn').click(function(e) {
             var $securityCodeBtn = $(this),
-                second = 10;
+                second = 10,
+                userPhoneNum = $.trim($('#user-phone-num').val());
 
-            $securityCodeBtn.addClass('active')
-                            .attr('disabled', 'disabled')
-                            .text(second + 's');
+            if (!userPhoneNum.length) {
+                alert('请输入您的手机号');
+                return false;
+            } else if (!userPhoneNumReg.test(userPhoneNum)) {
+                alert('手机号格式不正确，请检查');
+                return false;
+            } else {
+                service.getSecurityCode({
+                    wu_openid: openid,
+                    wu_phone: userPhoneNum,
+                }, function() {
+                    $securityCodeBtn.addClass('active')
+                                    .attr('disabled', 'disabled')
+                                    .text(second + 's');
 
-            var timer = setInterval(function() {
-                second--;
-                $securityCodeBtn.text(second + 's');
-                if(!second) {
-                    $securityCodeBtn.removeAttr('disabled')
-                                    .removeClass('active')
-                                    .text('获取验证码');
-                    clearInterval(timer);
-                }
-            }, 1000);
-
+                    var timer = setInterval(function() {
+                        second--;
+                        $securityCodeBtn.text(second + 's');
+                        if(!second) {
+                            $securityCodeBtn.removeAttr('disabled')
+                                            .removeClass('active')
+                                            .text('获取验证码');
+                            clearInterval(timer);
+                        }
+                    }, 1000);
+                }, function(data, textStatus, jqXHR) {
+                    debugger;
+                }, function(jqXHR, textStatus, error) {
+                    debugger;
+                });
+            }
         });
     });
 </script>

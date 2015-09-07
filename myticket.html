@@ -1,0 +1,191 @@
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
+
+<html style="height:100%">
+<head>
+    <meta charset="utf-8">
+    <title>我的门票</title>
+    <meta name="author" content="disen.">
+    <meta property="wb:webmaster" content="e18061fd3a93725f" />
+    <meta property="og:url" content="/">
+    <meta property="og:title" content="Venvy: The Future of Online Video">
+    <meta property="og:type" content="Website">
+    <meta property="og:description" content="">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+    <meta http-equiv="cache-control" content="max-age=0" />
+    <meta http-equiv="cache-control" content="no-cache" />
+    <meta http-equiv="expires" content="0" />
+    <meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type="text/javascript" src="js/jquery-1.10.1.min.js"></script>
+    <script type="text/javascript" src="js/audio.js"></script>
+    <script src="js/remodal.min.js"></script>
+    <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script src="js/share.js"></script>
+    <script type="text/javascript" src="../../public/lib/openid.js"></script>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/myticket.css" />
+    <link rel="stylesheet" href="css/remodal-default-theme.css">
+    <link rel="stylesheet" href="css/remodal.css">
+
+</head>
+
+<body style="overflow:auto;height:100%">
+    <div class='mt-container' style="overflow:auto;width:100%;position:relative">
+        <div id="maindv" style="height:60%;margin-top:19%">
+            <div style="height:8%;text-align:center">
+                <img  style="height:60%" src="images/djckxq.png">
+            </div>
+            <div class="tbtn" >
+                <img id='btn1' src="images/btn1.jpg">
+            </div>
+            <div class="tbtn">
+                <img id='btn2' src="images/btn2.jpg">
+            </div>
+            <div class="tbtn">
+                <img id='btn3' src="images/btn3.jpg">
+            </div>
+            <div class="tbtn">
+                <img id='btn4'  src="images/btn4.jpg">
+            </div>
+        </div>
+
+        <div id="dpn1" style="height:60%;margin-top:20%;display:none">
+            <div style="height:20%;text-align:center">
+                <img  style="height:80%" src="images/gxhd.png">
+            </div>
+            <div style="color:#ff30a4;font-size:16px;text-align:center;line-height:20px">
+                <div>2015大宁音乐季</div>
+                <div>戴佩妮专场</div>
+            </div>
+             <div style="text-align:center;height:50%">
+                <img style="height:100%" src="images/tick1con.png">
+            </div>
+            <div style="color:#ff30a4;font-size:13px;width:80%;margin:auto;line-height:20px;display:none">
+                <div class="t2-span">
+                    <img  src="images/tickno.png">
+                    <span>时间：2015年10月17日 星期六 19:00</span>
+                </div>
+                <div class="t2-span">
+                    <img style="height:20px" src="images/tickno.png">
+                    <span>地点：大宁国际商业广场 中央广场</span>
+                </div>
+                <div class="t2-span">
+                    <img  src="images/tickno.png">
+                    <span>规则</span>
+                </div>
+            </div>
+            <div style="color:#ff30a4;font-size:10px;width:80%;margin:auto;padding-left:20px;line-height:10px;display:none">
+                <p>1、本券仅作为规定场地演出内场券使用，当日有效，不得用作其他用途；</p>
+                <p>2、门票转发、截图无效。一人一张，凭票入场；</p>
+                <p>2、本券不得兑换现金，不找零；</p>
+                <p>3、演出开场五分钟后停止检票，不得进入内场区；</p>
+                <p>4、进入内场区不得携带食物及饮料入内（瓶装饮料除外），禁止吸烟；</p>
+                <p>5、主办方可在法律允许的范围内对规则做适当调整。</p>
+            </div>
+            <div style="text-align:center;margin-top:10px">
+                <img style="height:80px" src="images/ewm_dpn.png">
+            </div>
+            <div style="color:#ff30a4;font-size:12px;width:80%;margin:auto;padding-left:20px;line-height:15px;text-align:center">
+                <p>本券为大宁音乐季门票二维码进场前</p>
+                <p>请出示此二维码</p>
+            </div>
+            <div style="text-align:center">
+                <button data-remodal-action="confirm" class="remodal-confirm">关闭</button>
+            </div>
+        </div>
+    </div>
+     <div data-remodal-id="modal" role="dialog" aria-labelledby="modalTitle" aria-describedby="modalDesc">
+        <button data-remodal-action="confirm" class="remodal-confirm">关闭</button>
+    </div>
+</body>
+<script id="templateA" type="text/x-template">
+    <div class="modal-content clear">
+        <a class="activity_share"></a>
+        <p style="clear:both;"></p>
+        <p>好音乐，和好朋友一起听</p>
+        <p>分享这个好消息，增加一次抽奖机会吧~</p>
+    </div>
+</script>
+<script id="templateDpn" type="text/x-template">
+    <div class="dpncontent clear">
+        <a class="activity_share"></a>
+        <p style="clear:both;"></p>
+        <p>好音乐，和好朋友一起听</p>
+        <p>分享这个好消息，增加一次抽奖机会吧~</p>
+    </div>
+</script>
+<script>
+    var modalInstance=null;
+    var tdata = null;
+
+    function showCj(){
+         var ele = $("<div class='tishixinxi'><p>您还没有获得门票，</p><p>继续努力吧!</p><button id='jxbtn' style='background-color:#ff30a4'>继续抽奖</button></div>");
+                    ele.appendTo($(".mt-container"));
+                    ele.find("#jxbtn").click(function(){
+                        if(modalInstance ==null){
+                            modalInstance = $('[data-remodal-id=modal]')
+                                .prepend($('#templateA').html())
+                                .css({
+                                    'position': 'absolute',
+                                    'right': '0'
+                                })
+                                .remodal({
+                                    closeOnOutsideClick: false
+                                })
+                        }else{
+                            
+                        }
+                        modalInstance.open();
+                    });
+    }
+    $(document).ready(function(){
+        addOneTimeShare();
+        openId = "o8OK2jppuieOX8XTO9INGq6NE5p4";
+
+        $("#btn1").click(function(){
+            if(!tdata){
+
+                showCj();
+                $("#maindv").hide();
+                return;
+            }
+            for(var i=0;i<tdata.length;i++){
+               var t = tdata[i];
+               if(t.wt_activityid==1){
+                    if(t.status==1){
+                        $("#dpn1").show();
+                    }else{
+                        showCj();
+                    }
+                    $("#maindv").hide();
+               }
+            }
+        });
+
+         $("#btn1").click(function(){
+
+        });
+
+          $("#btn1").click(function(){
+
+        });
+
+        $.ajax({
+              url: "http://h5.a.rongyi.com/pactivity/ticket/web/index.php?r=weixin%2Fmyticket",
+              dataType: 'json',
+              type:"post",
+              timeout: 8000,
+              data: "wt_openid="+openId,
+              success: function(data) {
+                
+                var tn = 0;
+                tdata = data;
+            }
+        });
+});
+        
+    
+</script>
+
+</html>

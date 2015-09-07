@@ -1,0 +1,39 @@
+.mt-container{
+	height: 100%;
+	width: 100%;
+	background-image: url('../images/mytbk.jpg');
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+}
+
+.tishixinxi{
+	text-align: center;
+	color: #ff30a4;
+	font-size: 20px;
+	font-weight: bold;
+	margin-top: 40%;
+}
+.activity_share{
+    float:right;
+    width: 232px;
+    height: 174px;
+    background: url(../images/icon-share.png) no-repeat right;
+    background-size: 70%;
+}
+.modal-content{
+    color: #fff;
+    margin-bottom:10px;
+}
+.tbtn{
+	text-align: center;
+	height: 26%;
+
+}
+.tbtn img{
+	height: 80%;
+}
+.t2-span img{
+	height: 20px;
+	float: left;
+	margin-right: 2px;
+}
