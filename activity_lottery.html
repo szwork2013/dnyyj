@@ -78,13 +78,15 @@
     .activity_list > li {
         float: left;
         width: 45%;
-        height: 50px;
+        height: 60px;
         margin-right: 10%;
         margin-bottom: 10px;
         background-color: #7466c5;
-
     }
 
+    .activity_list > li.active{
+        outline: 2px solid #000;
+    }
     .activity_list > li:active{
         background-color: #5a4f99;
     }
@@ -95,7 +97,7 @@
 
     .activity_list > li > p {
         color: #fff;
-        line-height: 25px;
+        line-height: 30px;
         font-size: 18px;
     }
 
@@ -307,8 +309,9 @@
         </div>
     </section>
     <div data-remodal-id="modal" role="dialog" aria-labelledby="modalTitle" aria-describedby="modalDesc">
-        <button data-remodal-action="confirm" class="remodal-confirm">关闭</button>
+
     </div>
+    <div id="loading"></div>
     <audio id="bgMusic" src="" autoplay="autoplay" loop="loop"></audio>
 </body>
 <script src="js/jquery-1.10.1.min.js"></script>
@@ -328,6 +331,7 @@
             <li>3、门票数量有限，一人一张，凭票入场，转发、截图无效。</li>
         </ol>
     </div>
+    <button data-remodal-action="confirm" class="remodal-confirm">关闭</button>
 </script>
 
 <script id="activityShareTpl" type="text/x-template">
@@ -372,25 +376,26 @@ $(function() {
         },
 
         onComplete: function(active) {
-            switch (this.element[0].id) {
-                case 'machine1':
-                    $("#machine1Result").text("Index: " + this.active);
-                    break;
-                case 'machine2':
-                    $("#machine2Result").text("Index: " + this.active);
-                    break;
-                case 'machine3':
-                    $("#machine3Result").text("Index: " + this.active);
-                    break;
-            }
+            // switch (this.element[0].id) {
+            //     case 'machine1':
+            //         $("#machine1Result").text("Index: " + this.active);
+            //         break;
+            //     case 'machine2':
+            //         $("#machine2Result").text("Index: " + this.active);
+            //         break;
+            //     case 'machine3':
+            //         $("#machine3Result").text("Index: " + this.active);
+            //         break;
+            // }
+            Modal.open(Modal.sorryTpl);
         },
 
 
         shuffle: function() {
-            Machine.machine1.shuffle(4, Machine.onComplete);
+            Machine.machine1.shuffle(4);
 
             setTimeout(function() {
-                Machine.machine2.shuffle(4, Machine.onComplete);
+                Machine.machine2.shuffle(4);
             }, 500);
 
             setTimeout(function() {
@@ -412,34 +417,46 @@ $(function() {
                 return 2;
             });
             return this;
+        },
+
+        start: function() {
+            Machine.shuffle().setRandomize();
         }
     };
     Machine.init();
 
     $(".slotMachineButton").click(function() {
-        Machine.shuffle().setRandomize();
+        Machine.start();
     });
 
     /* ------------------------------------------模态框------------------------------------------ */
     var Modal = {
-        modalElement: $('[data-remodal-id=modal]'),
+
+        $loadingEl: null,
+
+        $modalElement: null,
+
+        instance: null,
 
         alreadyGotTicketTpl: '<div class="modal-content">' +
                                 '<p>您已经获取该场次门票</p>' +
                                 '<p>请在<span class="f-pink f-s18">\"我的门票\"</span>中查询门票信息</p>' +
                                 '<p>你可以选择其他场次获取门票哦~</p>' +
-                            '</div>',
+                            '</div>' +
+                            '<button data-remodal-action="confirm" class="remodal-confirm">关闭</button>',
 
         congratulationsTpl: '<div class="modal-content">' +
                                 '<p>恭喜您获得大宁音乐季门票一张</p>' +
                                 '<p>快到<span class="f-pink f-s18">\"我的门票\"</span>中查询门票信息</p>'  +
-                            '</div>',
+                            '</div>' +
+                            '<button data-remodal-action="confirm" class="remodal-confirm">关闭</button>',
 
         sorryTpl: '<div class="modal-content">' +
                         '<p>获得门票只有一步之遥</p>' +
                         '<p>点击<span class="f-pink f-s18">\"继续抽奖\"</span>马上获取门票</p>' +
                         '<p>每人每天有三次机会哦！</p>' +
-                    '</div>',
+                    '</div>' +
+                    '<button data-remodal-action="confirm" class="remodal-confirm">关闭</button>',
 
         opportunitiesRunOutTpl: '<div class="modal-content">' +
                                     '<p>今天的抽奖次数已经用完啦!</p>' +
@@ -449,7 +466,17 @@ $(function() {
                                     '<p>我们将于<span class="f-pink">10月8日</span>公布幸运用户名单</p>' +
                                     '<p>详情可点击微信菜单栏</p>' +
                                     '<p><span class="f-pink">【乐享大宁】/</span><span class="f-pink">【大宁音乐季】</span>查看</p>' +
-                                '</div>',
+                                '</div>' +
+                                '<button data-remodal-action="confirm" class="remodal-confirm">关闭</button>',
+
+        init: function() {
+            Modal.$loadingEl = $('#loading');
+            Modal.$modalElement = $('[data-remodal-id=modal]');
+        },
+
+        loadingTpl: function() {
+            return $('#loadingTpl').html();
+        },
 
         activityRulesTpl: function() {
             return $('#activityRulesTpl').html();
@@ -457,20 +484,28 @@ $(function() {
 
         activityShareTpl: function() {
             return $('#activityShareTpl').html();
+        },
+
+        open: function(tpl, isShare) {
+            Modal.instance = Modal.$modalElement.empty().append(tpl)
+            .remodal({
+                closeOnOutsideClick: false
+            });
+            if(isShare) {
+                Modal.$modalElement.css({
+                    'position': 'absolute',
+                    'right': '0'
+                });
+            }
+            Modal.instance.open();
+        },
+
+        destroy: function() {
+            Modal.instance.destroy();
         }
     };
+    Modal.init();
 
-
-    // var modalInstance = $('[data-remodal-id=modal]')
-    // .css({
-    //     'position': 'absolute',
-    //     'right': '0'
-    // })
-    // .remodal({
-    //     closeOnOutsideClick: false
-    // })
-
-    // modalInstance.open();
 
     /* -------------------------------------------背景音乐--------------------------------------- */
 
@@ -523,6 +558,14 @@ $(function() {
                 $activityItem = $(target).closest('li');
                 musicObj = $activityItem.data('musicObj');
                 Music.playMusic(musicObj);
+                Music._setItemActiveStyle($activityItem);
+            }
+        },
+
+        _setItemActiveStyle: function($item) {
+            var className = 'active';
+            if(!$item.hasClass(className)) {
+                $item.addClass(className).siblings().removeClass(className);
             }
         },
 
