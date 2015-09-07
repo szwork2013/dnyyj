@@ -68,18 +68,18 @@ button,.button{
 	background-repeat: no-repeat;
 	background-position: center center;
 	background-size: 30px 30px;
-	transition:  0.6s;
-	-moz-transition:  0.6s; /* Firefox 4 */
-	-webkit-transition: left 0.6s; /* Safari 和 Chrome */
-	-o-transition:  0.6s; /* Opera */
-
+	transition:  0.5s;
+	-moz-transition:  0.5s; /* Firefox 4 */
+	-webkit-transition: left 0.5s; /* Safari 和 Chrome */
+	-o-transition:  0.5s; /* Opera */
+ 
 }
 .sy-hdjt{
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     position: relative;
 }
-.bk-hd{
+.bk-hd{ 
 	background-image:inherit;
 	position: absolute;
 	top:0px;

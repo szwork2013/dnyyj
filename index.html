@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
 
-<html style="overflow:hidden;height:100%">
+<html style="height:100%">
 
 
 <head>
@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="css/style.css" />
 </head>
 
-<body style="overflow:hidden;height:100%" >
+<body style="height:100%" >
 	<div id="page1" style="width:100%;height:100%">
 		<div class="sy-bj">
 			<div style="text-align:center">
@@ -83,7 +83,7 @@
 		</div>
 	</div>
 
-	<div id="page3"  style="width:100%;height:100%;background-color:rgba(0,0,0,0.75)">
+	<div id="page3"  style="width:100%;height:100%;background-color:rgba(0,0,0,0.75);display:none">
 		<div class="sy-p3" style="text-align:center;position:relative">
 			<div id='jsbutton' style="margin:auto;position:absolute;top:3px;left:3px;width:50px;height:50px">
 			
@@ -105,11 +105,8 @@
 			<div class='fctext'>即刻开始抢票~</div>
 	</div>
 
-	<div id="introduce" style="overflow:auto;width:100%;position:relative">
-	    <img id="myimg" style="width:100%;" src="images/introduce.jpg">
-	    <button id='closebutton'  style="position:absolute;left:30%;width:40%; background-color: #7366c5;">
-	    关闭
-	    </button>
+	<div id="introduce" style="width:100%;position:relative;display:none">
+	   
     </div>
 </body>
 <script type="text/javascript">
@@ -121,6 +118,9 @@
 	var timenum = 0;
 	var interval2;
 	var touchmove = false;
+	var preventEvent=function(e){
+		e.preventDefault();
+	}
 	function getTimeString(seconds){
 		var min = parseInt(seconds/60);
 		var sec = seconds-min*60;
@@ -139,6 +139,8 @@
 		}
 	}
 
+
+
 	function playMp3(url){
 
 		g_audio.elems["id"] ="asdsds";
@@ -147,17 +149,21 @@
 		
 		g_audio.play();
 	}
-document.addEventListener('touchmove', function (e) {e.preventDefault(); },false);
+
+
+	document.addEventListener('touchmove', function (e) {preventEvent(e); },false); 
 
 	$(document).ready(function(){
 		playMp3("mp3/zy.mp3");
 		g_audio.loop = "loop";
 
 		var e = $(".sy-phone").get(0);
-		e.addEventListener('touchstart', function(event) {
+		// $("#page1").get(0).addEventListener('touchstart', function(event) {
+		// 	e.preventDefault();
+		// });
 		
-		});
-
+ 
+		
 		$("#qpfc").click(function(){
 			$("#qpfc").css("opacity","0");
 			window.setTimeout(function(){$("#qpfc").hide();},600);
@@ -173,6 +179,8 @@ document.addEventListener('touchmove', function (e) {e.preventDefault(); },false
 					$("#page2").show();
 					g_audio.loop = false;
 					playMp3("mp3/ldxs.mp3");
+
+
 
 					g_audio.addEventListener("ended", function(){
 						window.clearInterval(interval2);
@@ -190,10 +198,25 @@ document.addEventListener('touchmove', function (e) {e.preventDefault(); },false
 		});
 
 		$("#jsbutton").click(function(){
-			//$("#page3").hide();
-			//$("#introduce").show();
-			
-			window.open("introduce.html");
+			$("#page3").hide();
+			preventEvent = function(e){
+
+			};
+			if($("#introduce").children().length==0){
+				$("<img id=\"myimg\" style=\"width:100%;\" src=\"images/introduce.jpg\"><button id=\'closebutton\'  style=\"position:absolute;left:30%;width:40%; background-color: #7366c5;display:none\">关闭</button>").appendTo($("#introduce"));
+
+				$("#myimg").load(function(){
+	            	$("#closebutton").css("top",$("#myimg").height()-80);
+	            	$("#closebutton").show();
+		        });
+		        $("#closebutton").click(function(){
+		            $("#introduce").hide();
+		            $("#page3").show();
+		        });
+
+    		}
+			$("#introduce").show();
+			//window.open("introduce.html");
 		});
 
 		$("#sygd").click(function(){

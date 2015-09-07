@@ -72,6 +72,9 @@
         margin-bottom: 10px;
     }
 
+    .activity_list{
+        -webkit-tap-highlight-color: transparent;
+    }
     .activity_list > li {
         float: left;
         width: 45%;
@@ -79,6 +82,11 @@
         margin-right: 10%;
         margin-bottom: 10px;
         background-color: #7466c5;
+
+    }
+
+    .activity_list > li:active{
+        background-color: #5a4f99;
     }
 
     .activity_list > li:nth-child(2n) {
@@ -93,6 +101,7 @@
 
     .activity_lottery {
         padding: 0 10px;
+        margin-top: 10px;
     }
 
     .clearfix:after {
@@ -106,10 +115,9 @@
     .activity-lottery-machine {
         position: relative;
         padding: 0 10px;
-    }
-
-    .activity-lottery-machine > img {
-        max-width: 100%;
+        height: 110px;
+        background: url(images/slot-machine-main.png) no-repeat center;
+        background-size: contain;
     }
 
     .btn {
@@ -120,7 +128,7 @@
         background-color: #ff30a4;
         color: #fff;
         text-align: center;
-        -webkit-tap-highlight-color: transparent;
+        -webkit-tap-highlight-color: #e22790;
     }
 
     .btn:active {
@@ -132,23 +140,41 @@
     }
 
     .activity-lottery-btn-group {
-        margin-top: 10px;
+        margin-top: 20px;
     }
 
     .activity-machine-container {
+        position: relative;
+        width: 260px;
+        padding-top: 26px;
+        padding-left: 24px;
+        margin: 0 auto;
+    }
+
+    .rocker{
         position: absolute;
-        top: 36px;
-        bottom: 20px;
-        left: 30px;
-        right: 40px;
+        right: -21px;
+        top: -14px;
+        width: 50px;
+        height: 100px;
+        background: url(images/rockers.png) no-repeat;
+        background-position: 0 0;
+        background-size: 100%;
         z-index: 100;
     }
 
+    .rocker-ball{
+        display: block;
+        width: 30px;
+        height: 30px;
+        margin: 10px auto 0;
+        -webkit-tap-highlight-color: transparent;
+    }
+
     .slotMachine {
-        float: left;
-        width: 24%;
-        height: 90%;
-        padding: 0px;
+        display: inline-block;
+        width: 60px;
+        height: 70px;
         overflow: hidden;
         text-align: center;
         background: url(images/icon-machine-square.png) no-repeat;
@@ -156,13 +182,18 @@
     }
 
     .slotMachine:not(:last-child) {
-        margin-right: 10%;
+        margin-right: 20px;
     }
 
     .slotMachine .slot {
-        height: 100px;
-        background-position-x: 55%;
+        height: 70px;
+        background-position: 50%;
         background-repeat: no-repeat;
+        background-size: 80%;
+    }
+
+    .slotMachine .slot.slot2{
+        background-size: 50%;
     }
 
     .slot1 {
@@ -174,10 +205,6 @@
     }
 
     .slot3 {
-        background-image: url("images/icon-ticket-movie.jpg");
-    }
-
-    .slot4 {
         background-image: url("images/iocn-ticket-music.png");
     }
 
@@ -216,6 +243,11 @@
         background: url(images/icon-share.png) no-repeat right;
         background-size: 70%;
     }
+    #bgMusic{
+        width: 0;
+        height: 0;
+        opacity: 0;
+    }
     </style>
 </head>
 
@@ -248,49 +280,41 @@
     </section>
     <section class="activity_lottery">
         <div class="activity-lottery-machine">
-            <img src="images/machine-main.png" alt="抽奖">
             <div class="activity-machine-container">
                 <div id="machine1" class="slotMachine">
                     <div class="slot slot1"></div>
                     <div class="slot slot2"></div>
                     <div class="slot slot3"></div>
-                    <div class="slot slot4"></div>
                 </div>
                 <div id="machine2" class="slotMachine">
                     <div class="slot slot1"></div>
                     <div class="slot slot2"></div>
                     <div class="slot slot3"></div>
-                    <div class="slot slot4"></div>
                 </div>
                 <div id="machine3" class="slotMachine">
                     <div class="slot slot1"></div>
                     <div class="slot slot2"></div>
                     <div class="slot slot3"></div>
-                    <div class="slot slot4"></div>
+                </div>
+                <div class="rocker">
+                    <a id="rocker-ball" class="rocker-ball slotMachineButton"></a>
                 </div>
             </div>
         </div>
         <div class="activity-lottery-btn-group clearfix">
-            <a id="slotMachineButton" class="btn">继续抽奖</a>
+            <a class="btn slotMachineButton">继续抽奖</a>
             <a class="btn" href="#">我的门票</a>
         </div>
     </section>
     <div data-remodal-id="modal" role="dialog" aria-labelledby="modalTitle" aria-describedby="modalDesc">
         <button data-remodal-action="confirm" class="remodal-confirm">关闭</button>
     </div>
+    <audio id="bgMusic" src="" autoplay="autoplay" loop="loop"></audio>
 </body>
 <script src="js/jquery-1.10.1.min.js"></script>
 <script src="js/jquery.slotmachine.min.js"></script>
 <script src="js/remodal.min.js"></script>
-<script>
-    window.REMODAL_GLOBALS = {
-      NAMESPACE: 'modal',
-      DEFAULTS: {
-        hashTracking: false
-      }
-    };
-</script>
-<script id="templateE" type="text/x-template">
+<script id="activityRulesTpl" type="text/x-template">
     <div class="modal-content activity_rules">
         <h3>活动方式：</h3>
         <ol>
@@ -306,7 +330,7 @@
     </div>
 </script>
 
-<script id="templateF" type="text/x-template">
+<script id="activityShareTpl" type="text/x-template">
     <div class="modal-content clear">
         <a class="activity_share"></a>
         <p style="clear:both;"></p>
@@ -316,98 +340,225 @@
 </script>
 <script>
 $(function() {
-    var machine1 = $("#machine1").slotMachine({
-        active: 0,
-        delay: 500
-    });
 
-    var machine2 = $("#machine2").slotMachine({
-        active: 1,
-        delay: 500
-    });
+    /**
+     * 模态框全局配置
+     * @type {Object}
+     */
+    window.REMODAL_GLOBALS = {
+      NAMESPACE: 'modal',
+      DEFAULTS: {
+        hashTracking: false
+      }
+    };
 
-    var machine3 = $("#machine3").slotMachine({
-        active: 2,
-        delay: 500
-    });
+    /* --------------------------老虎机---------------------------------------------------------*/
+    var Machine = {
+        init: function() {
+            Machine.machine1 = $("#machine1").slotMachine({
+                active: 0,
+                delay: 500
+            });
 
-    function onComplete(active) {
-        switch (this.element[0].id) {
-            case 'machine1':
-                $("#machine1Result").text("Index: " + this.active);
-                break;
-            case 'machine2':
-                $("#machine2Result").text("Index: " + this.active);
-                break;
-            case 'machine3':
-                $("#machine3Result").text("Index: " + this.active);
-                break;
+            Machine.machine2 = $("#machine2").slotMachine({
+                active: 1,
+                delay: 500
+            });
+
+            Machine.machine3 = $("#machine3").slotMachine({
+                active: 2,
+                delay: 500
+            });
+        },
+
+        onComplete: function(active) {
+            switch (this.element[0].id) {
+                case 'machine1':
+                    $("#machine1Result").text("Index: " + this.active);
+                    break;
+                case 'machine2':
+                    $("#machine2Result").text("Index: " + this.active);
+                    break;
+                case 'machine3':
+                    $("#machine3Result").text("Index: " + this.active);
+                    break;
+            }
+        },
+
+
+        shuffle: function() {
+            Machine.machine1.shuffle(4, Machine.onComplete);
+
+            setTimeout(function() {
+                Machine.machine2.shuffle(4, Machine.onComplete);
+            }, 500);
+
+            setTimeout(function() {
+                Machine.machine3.shuffle(4, Machine.onComplete);
+            }, 1000);
+
+            return this;
+        },
+
+
+        setRandomize: function() {
+            Machine.machine1.setRandomize(function() {
+                return 2;
+            });
+            Machine.machine2.setRandomize(function() {
+                return 2;
+            });
+            Machine.machine3.setRandomize(function() {
+                return 2;
+            });
+            return this;
         }
-    }
+    };
+    Machine.init();
 
-    $("#slotMachineButton").click(function() {
-
-        machine1.shuffle(5, onComplete);
-
-        setTimeout(function() {
-            machine2.shuffle(5, onComplete);
-        }, 500);
-
-        setTimeout(function() {
-            machine3.shuffle(5, onComplete);
-        }, 1000);
-
-    })
-
-    machine1.setRandomize(function() {
-        return 3;
-    });
-    machine2.setRandomize(function() {
-        return 3;
-    });
-    machine3.setRandomize(function() {
-        return 3;
+    $(".slotMachineButton").click(function() {
+        Machine.shuffle().setRandomize();
     });
 
+    /* ------------------------------------------模态框------------------------------------------ */
+    var Modal = {
+        modalElement: $('[data-remodal-id=modal]'),
 
-    var templateA = '<div class="modal-content">' +
-                        '<p>您已经获取该场次门票</p>' +
-                        '<p>请在<span class="f-pink f-s18">\"我的门票\"</span>中查询门票信息</p>' +
-                        '<p>你可以选择其他场次获取门票哦~</p>' +
-                    '</div>';
+        alreadyGotTicketTpl: '<div class="modal-content">' +
+                                '<p>您已经获取该场次门票</p>' +
+                                '<p>请在<span class="f-pink f-s18">\"我的门票\"</span>中查询门票信息</p>' +
+                                '<p>你可以选择其他场次获取门票哦~</p>' +
+                            '</div>',
 
-    var templateB = '<div class="modal-content">' +
-                        '<p>恭喜您获得大宁音乐季门票一张</p>' +
-                        '<p>快到<span class="f-pink f-s18">\"我的门票\"</span>中查询门票信息</p>'  +
-                    '</div>';
+        congratulationsTpl: '<div class="modal-content">' +
+                                '<p>恭喜您获得大宁音乐季门票一张</p>' +
+                                '<p>快到<span class="f-pink f-s18">\"我的门票\"</span>中查询门票信息</p>'  +
+                            '</div>',
 
-    var templateC = '<div class="modal-content">' +
+        sorryTpl: '<div class="modal-content">' +
                         '<p>获得门票只有一步之遥</p>' +
                         '<p>点击<span class="f-pink f-s18">\"继续抽奖\"</span>马上获取门票</p>' +
                         '<p>每人每天有三次机会哦！</p>' +
-                    '</div>';
+                    '</div>',
 
-    var templateD = '<div class="modal-content">' +
-                        '<p>今天的抽奖次数已经用完啦!</p>' +
-                        '<p>别灰心，明天继续来参与哦！</p>' +
-                        '<p>所有参与抢票用户</p>' +
-                        '<p>还将获得一次幸运中奖机会</p>' +
-                        '<p>我们将于<span class="f-pink">10月8日</span>公布幸运用户名单</p>' +
-                        '<p>详情可点击微信菜单栏</p>' +
-                        '<p><span class="f-pink">【乐享大宁】/</span><span class="f-pink">【大宁音乐季】</span>查看</p>' +
-                    '</div>'
+        opportunitiesRunOutTpl: '<div class="modal-content">' +
+                                    '<p>今天的抽奖次数已经用完啦!</p>' +
+                                    '<p>别灰心，明天继续来参与哦！</p>' +
+                                    '<p>所有参与抢票用户</p>' +
+                                    '<p>还将获得一次幸运中奖机会</p>' +
+                                    '<p>我们将于<span class="f-pink">10月8日</span>公布幸运用户名单</p>' +
+                                    '<p>详情可点击微信菜单栏</p>' +
+                                    '<p><span class="f-pink">【乐享大宁】/</span><span class="f-pink">【大宁音乐季】</span>查看</p>' +
+                                '</div>',
 
-    var modalInstance = $('[data-remodal-id=modal]')
-    .prepend($('#templateF').html())
-    .css({
-        'position': 'absolute',
-        'right': '0'
-    })
-    .remodal({
-        closeOnOutsideClick: false
-    })
+        activityRulesTpl: function() {
+            return $('#activityRulesTpl').html();
+        },
 
-    modalInstance.open();
+        activityShareTpl: function() {
+            return $('#activityShareTpl').html();
+        }
+    };
+
+
+    // var modalInstance = $('[data-remodal-id=modal]')
+    // .css({
+    //     'position': 'absolute',
+    //     'right': '0'
+    // })
+    // .remodal({
+    //     closeOnOutsideClick: false
+    // })
+
+    // modalInstance.open();
+
+    /* -------------------------------------------背景音乐--------------------------------------- */
+
+    var Music = {
+
+        baseUrl: '',
+        musicData: null,
+        $activityList: null,
+        $activityItems: null,
+        $audioEl: null,
+
+        init: function() {
+            Music.baseUrl = 'mp3/';
+            Music.musicData = [
+                {
+                    id: '1',
+                    url: Music.baseUrl + 'zy.mp3'
+                },
+                {
+                    id: '2',
+                    url: Music.baseUrl + 'callmemaybe.mp3'
+                },
+                {
+                    id: '3',
+                    url: Music.baseUrl + 'wlbt.mp3'
+                },
+                {
+                    id: '4',
+                    url: Music.baseUrl + 'hctt.mp3'
+                }
+            ];
+            Music.$activityList = $('#activity_list');
+            Music.$activityItems = Music.$activityList.children();
+            Music.$audioEl = $('#bgMusic');
+
+            Music._setItemsData()
+                    .bindEvent();
+        },
+
+        bindEvent: function() {
+            Music.$activityList.on('click', Music.activityListClickHandler);
+            return this;
+        },
+
+        activityListClickHandler: function(e) {
+            var target = e.target,
+                $activityItem = null,
+                musicObj = null;
+            if(target.nodeName.toLocaleUpperCase() === 'P') {
+                $activityItem = $(target).closest('li');
+                musicObj = $activityItem.data('musicObj');
+                Music.playMusic(musicObj);
+            }
+        },
+
+        _setItemsData: function() {
+            var len = Music.$activityItems.length,
+                $activityItem = null,
+                i = 0;
+            for(; i < len; i++) {
+                $activityItem = Music.$activityItems.eq(i);
+                $activityItem.data('musicObj', Music.musicData[i]);
+            }
+            return this;
+        },
+
+        playMusic: function(musicObj) {
+            Music.$audioEl.attr('src', musicObj.url);
+        }
+    };
+    Music.init();
+
+
+    $('#rocker-ball').click(function(e) {
+        var $rockerEl = $(this).parent();
+        $rockerEl.css({
+            'background-image': 'url(images/rocker-animate.gif)',
+            'background-position': '0 -22px'
+        });
+        var timer = setTimeout(function() {
+            $rockerEl.css({
+                'background-image': 'url(images/rockers.png)',
+                'background-position': '0 0'
+            });
+        }, 500);
+    });
+
+
 });
 </script>
 
