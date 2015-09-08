@@ -8,7 +8,7 @@
     <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
     <script type="text/javascript" src="../../public/lib/openid.js"></script>
     <style>
-    body {
+    body,button {
         margin: 0;
         padding: 0;
     }
@@ -29,7 +29,7 @@
 
     body {
         background: url(images/bg2.jpg) no-repeat;
-        background-size: 100%;
+        background-size: 100% 100%;
     }
 
     input {
@@ -62,8 +62,8 @@
     .submit-btn {
         display: block;
         width: 100%;
-        height: 40px;
-        line-height: 40px;
+        height: 42px;
+        line-height: 42px;
         background-color: #ff30a4;
         color: #fff;
         font-size: 16px;
@@ -105,6 +105,7 @@
         padding-left: 10px;
         padding-right: 10px;
         border-left: 1px solid #babad4;
+        font-size: 16px;
     }
 
     fieldset > div > label {
@@ -204,15 +205,10 @@
             userPhoneNumReg = /^1\d{10}$/,
             securityCodeReg = /^\d{6}$/;
 
-
-        var openId = 'o8OK2jpy58PahCujxyPM4ydODg7Y';
-
         var service = {
 
-            baseUrl: '',
             getSecurityCodeUrl: 'http://h5.a.rongyi.com/pactivity/ticket/web/index.php?r=weixin%2Fcode',
             startRobTicketUrl: 'http://h5.a.rongyi.com/pactivity/ticket/web/index.php?r=weixin%2Fregister',
-            isRegisterUrl: 'http://h5.a.rongyi.com/pactivity/ticket/web/index.php?r=weixin%2Fislogin',
 
             ajax: function(opts) {
                 var data = opts.data,
@@ -249,15 +245,6 @@
                 });
             },
 
-            isRegister: function(data, onSuccess,onError) {
-                service.ajax({
-                    url: service.isRegisterUrl,
-                    data: data,
-                    onSuccess: onSuccess,
-                    onError: onError
-                });
-            },
-
             getSecurityCode: function(data, onBefore, onSuccess, onError) {
                 service.ajax({
                     url: service.getSecurityCodeUrl,
@@ -279,17 +266,6 @@
                 });
             }
         };
-
-
-        service.isRegister({
-            wu_openid: openId
-        }, function(data) {
-            if(data && data.status === 2) {
-                window.location.href = './activity_lottery.html';
-            }
-        }, function() {
-
-        });
 
 
         $('#rob-ticket-submit').click(function(e) {
@@ -426,6 +402,15 @@
             $button.attr('disabled', 'disabled')
                 .text(second + 's');
         }
+
+        $('input').focus(function(e) {
+            $('body').css('background-size', '100%');
+        });
+
+        $('input').blur(function(e) {
+            $('body').css('background-size', '100% 100%');
+        });
+
     });
 </script>
 </html>

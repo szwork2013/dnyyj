@@ -37,20 +37,20 @@ $.ajax({
                 success: function () {
                     // 用户确认分享后执行的回调函数
                     $.ajax({
-                              url: "http://h5.a.rongyi.com/pactivity/ticket/web/index.php?r=weixin%2Fshare",
-                              dataType: 'json',
-                              type:"post",
-                              timeout: 8000,
-                              data: "wt_openid="+openId,
-                              success: function(data) {
-
-                            }
+                          url: "http://h5.a.rongyi.com/pactivity/ticket/web/index.php?r=weixin%2Fshare",
+                          dataType: 'json',
+                          type:"post",
+                          timeout: 8000,
+                          data: "wt_openid="+openId,
+                          success: function(data) {
+                            Modal.destroy();
+                        }
                     });
 
                 },
                 cancel: function () {
                     // 用户取消分享后执行的回调函数
-
+                    Modal.destroy();
                 }
             });
 
