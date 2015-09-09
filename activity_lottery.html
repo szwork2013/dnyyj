@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <link rel="stylesheet" href="css/remodal-default-theme.css">
     <link rel="stylesheet" href="css/remodal.css">
-    <link rel="stylesheet" href="css/activity_reset.css">
+    <link rel="stylesheet" href="css/activity_common.css">
     <link rel="stylesheet" href="css/activity_lottery.css">
 </head>
 
@@ -18,7 +18,10 @@
         </div>
     </header>
     <section class="activity_sct">
-        <h3>请选择场次</h3>
+        <h3>
+            <span>1、请选择场次</span>
+            <span>2、拉动手柄马上抽奖</span>
+        </h3>
         <ul id="activity_list" class="activity_list clearfix">
             <li>
                 <P>戴佩妮</P>
@@ -114,7 +117,7 @@
             wu_openid: openId
         }, function(data) {
             if (data && data.status !== 2) {
-                window.location.href = './activity_main.html'
+                // window.location.href = './activity_main.html'
             }
         });
 

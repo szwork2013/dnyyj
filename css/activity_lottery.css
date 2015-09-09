@@ -35,6 +35,7 @@ header {
     color: #7466c5;
     font-weight: normal;
     margin-bottom: 10px;
+    font-size: 16px;
 }
 
 .activity_list {
@@ -67,6 +68,7 @@ header {
 .activity_lottery {
     padding: 0 10px;
     margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .clearfix:after {
@@ -179,40 +181,6 @@ header {
     background-image: url("../images/iocn-ticket-music.png");
 }
 
-.modal-content {
-    color: #fff;
-    margin-bottom: 10px;
-}
-
-.f-pink {
-    color: #ff30a4;
-}
-
-.f-s18 {
-    font-size: 18px;
-}
-.f-s22{
-    font-size: 22px;
-}
-
-.modal-content.activity_rules {
-    text-align: left;
-}
-
-.modal-content.activity_rules > h3 {
-    font-size: 16px;
-    margin-bottom: 10px;
-}
-
-.modal-content.activity_rules ol {
-    margin-bottom: 40px;
-}
-
-.modal-content.activity_rules li {
-    font-size: 14px;
-    line-height: 1.5;
-}
-
 .activity_share {
     float: right;
     width: 232px;
@@ -227,14 +195,4 @@ header {
     width: 0;
     height: 0;
     opacity: 0;
-}
-
-.f-bold {
-    font-weight: bold;
-}
-
-
-div[data-remodal-id=modal].shareModal{
-    position: absolute;
-    right: 0;
 }
