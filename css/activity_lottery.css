@@ -221,3 +221,9 @@ header {
 .f-bold {
     font-weight: bold;
 }
+
+
+div[data-remodal-id=modal].shareModal{
+    position: absolute;
+    right: 0;
+}

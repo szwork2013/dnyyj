@@ -144,7 +144,6 @@
             },
 
             onComplete: function() {
-                Modal.open(Modal.sorryTpl);
                 Machine.showResultMessage();
             },
 
@@ -178,22 +177,24 @@
             },
 
             start: function(status) {
-                var random = Math.round(Math.random() * 2);
+                var randomArr = Machine.getRandom();
                 Machine.status = status;
                 Machine.isStart = true;
                 if (Machine.status === 1) {
                     Machine.setRandomize(2, 2, 2);
                 } else {
-                    Machine.destroy().init();
+                    Machine.setRandomize(randomArr[0], randomArr[1], randomArr[2]);
                 }
 
                 Machine.rockerAnimate().shuffle();
                 return this;
             },
 
-            destroy: function() {
-                Machine.machine1 = Machine.machine2 = Machine.machine3 = null;
-                return this;
+            getRandom: function() {
+                var random = Math.round(Math.random() * 2),
+                    arr = [0, 1, random];
+                for(var j, x, i = arr.length; i; j = parseInt(Math.random() * i), x = arr[--i], arr[i] = arr[j], arr[j] = x);
+                return arr;
             },
 
             rockerAnimate: function() {
@@ -243,7 +244,6 @@
         $(".slotMachineButton").click(function(e) {
             var target = e.target,
                 activityId = Music.getActivityId();
-            console.log(activityId);
             if (!Machine.isStart) {
                 service.getTicket({
                     wt_activityid: activityId,
@@ -314,8 +314,8 @@
                 '<button data-remodal-action="confirm" class="remodal-confirm">关闭</button>',
 
             init: function() {
-                Modal.$loadingEl = $('#loading');
                 Modal.$modalElement = $('[data-remodal-id=modal]');
+                window.Modal = Modal;
             },
 
             activityShareTpl: function() {
@@ -327,17 +327,18 @@
             },
 
             open: function(tpl, isShare) {
-
-                Modal.instance = Modal.$modalElement.empty().append(tpl)
+                var className = 'shareModal';
+                Modal.instance = Modal.$modalElement.html(tpl)
                     .remodal({
                         closeOnOutsideClick: false,
                         hashTracking: false
                     });
                 if (isShare) {
-                    Modal.$modalElement.css({
-                        'position': 'absolute',
-                        'right': '0'
-                    });
+                    Modal.$modalElement.addClass(className);
+                } else {
+                    if(Modal.$modalElement.hasClass(className)) {
+                        Modal.$modalElement.removeClass(className);
+                    }
                 }
                 Modal.instance.open();
             },
@@ -351,7 +352,6 @@
             }
         };
         Modal.init();
-
 
         /* -------------------------------------------背景音乐--------------------------------------- */
 
@@ -441,7 +441,7 @@
         $('#activity_rules').click(function(e) {
             Modal.open(Modal.activityRulesTpl());
         });
-    });
+    })();
     </script>
 </body>
 

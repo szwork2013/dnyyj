@@ -45,14 +45,17 @@ $.ajax({
                           timeout: 8000,
                           data: "wu_openid="+openId,
                           success: function(data) {
-                            alert(typeof Modal);
-                            Modal.destroy();
+                            if(Modal){
+                                Modal.destroy();
+                            }
                         }
                     });
                 },
                 cancel: function () {
                     // 用户取消分享后执行的回调函数
-                    Modal.destroy();
+                    if(Modal){
+                        Modal.destroy();
+                    }
                 }
             });
 
