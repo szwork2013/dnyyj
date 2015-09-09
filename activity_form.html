@@ -36,7 +36,7 @@
         font-size: 14px;
     }
 
-    button{
+    button {
         border: none;
         outline: none;
         font-family: Microsoft Yahei;
@@ -58,7 +58,8 @@
         background-color: #e22790;
         outline: none;
     }
-    .submit-btn:disabled{
+
+    .submit-btn:disabled {
         background-color: #777576;
     }
 
@@ -99,7 +100,7 @@
         background-color: #fff;
     }
 
-    .icon{
+    .icon {
         position: absolute;
         margin: auto;
         top: 0;
@@ -111,17 +112,17 @@
         line-height: 30px;
     }
 
-    .icon-user{
+    .icon-user {
         background: url(images/icon-user.png) no-repeat;
         background-size: 30px;
     }
 
-    .icon-phone{
+    .icon-phone {
         background: url(images/icon-phone.png) no-repeat center;
         background-size: 20px;
     }
 
-    .icon-cycle{
+    .icon-cycle {
         background-color: #ff30a4;
         border-radius: 50%;
         color: #fff;
@@ -129,22 +130,26 @@
         font-style: normal;
         text-align: center;
     }
-    .security-code-btn{
+
+    .security-code-btn {
         position: absolute;
         right: 0;
-        width:80px;
+        width: 80px;
         height: 100%;
         line-height: 44px;
         background-color: #ff30a4;
         color: #fff;
     }
-    .security-code-btn:disabled{
+
+    .security-code-btn:disabled {
         background-color: #777576;
     }
-    .security-code-btn:active{
+
+    .security-code-btn:active {
         background-color: #e22790;
     }
-    #msg{
+
+    #msg {
         padding-bottom: 10px;
         border-bottom: 1px solid #ddd;
     }
@@ -185,7 +190,7 @@
     </form>
     <div data-remodal-id="modal" class="msg-alert" role="dialog" aria-labelledby="modalTitle" aria-describedby="modalDesc">
         <p id="msg"></p>
-        <button data-remodal-action="confirm" class="remodal-confirm msg-alert-confirm"><span>确定</span></button>
+        <button data-remodal-action="confirm" class="remodal-confirm msg-alert-confirm">确定</button>
     </div>
 </body>
 <script src="js/jquery-1.10.1.min.js"></script>
@@ -195,184 +200,192 @@
 <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 <script type="text/javascript" src="../../public/lib/openid.js"></script>
 <script>
-    $(function() {
+$(function() {
+
+    var userNameReg = /^[\u4e00-\u9fa5a-zA-Z]{2,}$/,
+        userPhoneNumReg = /^1\d{10}$/,
+        securityCodeReg = /^\d{6}$/;
+    var modal = null;
 
 
-        function Modal(opts) {
-            if(typeof Modal.instance === 'object') {
-                return Modal.instance;
-            }
+    service.isRegister({
+        wu_openid: openId
+    }, function(data) {
+        if (data && data.status === 2) {
+            window.location.href = './activity_lottery.html';
+        }
+    });
 
-            this.$el = opts && opts.$el || $("[data-remodal-id='modal']");
-            this.modalInstance = null;
 
-            Modal.instance = this;
+    function Modal(opts) {
+        if (typeof Modal.instance === 'object') {
+            return Modal.instance;
         }
 
-        Modal.prototype.open = function(msg) {
-            this.modalInstance = this.$el.find('#msg').text(msg).end().remodal({
-                                closeOnOutsideClick: false,
-                                hashTracking: false
-                             });
-            this.modalInstance.open();
-        };
-        var modal = new Modal();
+        this.$el = opts && opts.$el || $("[data-remodal-id='modal']");
+        this.modalInstance = null;
 
+        Modal.instance = this;
+    }
 
-        service.isRegister({
-            wu_openid: openId
-        }, function(data) {
-            if(data && data.status === 2) {
-                window.location.href = './activity_lottery.html';
-            }
+    Modal.prototype.open = function(msg) {
+        this.modalInstance && this.destroy();
+        this.modalInstance = this.$el.find('#msg').text(msg).end().remodal({
+            closeOnOutsideClick: false,
+            hashTracking: false
         });
+        this.modalInstance.open();
+    };
 
-        var userNameReg = /^[\u4e00-\u9fa5a-zA-Z]{2,}$/,
-            userPhoneNumReg = /^1\d{10}$/,
-            securityCodeReg = /^\d{6}$/;
-
-        $('#rob-ticket-submit').click(function(e) {
-            var userName = $.trim($('#user-name').val()),
-                userPhoneNum = $.trim($('#user-phone-num').val()),
-                securityCode = $.trim($('#security-code').val()),
-                $robTicketButton = $(this);
+    Modal.prototype.destroy = function() {
+        this.modalInstance.destroy();
+    }
 
 
-            if(!userName.length) {
-                modal.open('请输入您的姓名');
-                return false;
-            } else if (!userNameReg.test(userName)) {
-                modal.open('姓名格式不正确，最少2个中文或英文字符');
-                return false;
-            } else if (!userPhoneNum.length) {
-                modal.open('请输入您的手机号');
-                return false;
-            } else if (!userPhoneNumReg.test(userPhoneNum)) {
-                modal.open('手机号格式不正确，请检查');
-                return false;
-            } else if (!securityCode.length) {
-                modal.open('请输入您的验证码');
-                return false;
-            } else if(!securityCodeReg.test(securityCode)) {
-                modal.open('验证码格式不正确，6位数字，请检查');
-                return false;
-            } else {
-                service.startRobTicket({
-                    wu_phone: userPhoneNum,
-                    wu_name: userName,
-                    wu_openid: openId,
-                    wu_code: securityCode
-                }, function() {
-                    setButtonDisabled($robTicketButton);
-                }, function(data, textStatus, jqXHR) {
-                    if(data) {
-                        switch(data.status) {
-                            case 1:
-                                window.location.href = './activity_lottery.html';
-                                break;
-                            case 3:
-                                modal.open('用户手机号不合法');
-                                break;
-                            case 4:
-                                modal.open('手机号已被注册');
-                                break;
-                            case 5:
-                                modal.open('验证码有误');
-                                break;
-                            case 7:
-                                modal.open('注册失败');
-                                break;
-                            default:
-                                break;
-                        }
+    $('#rob-ticket-submit').click(function(e) {
+        var userName = $.trim($('#user-name').val()),
+            userPhoneNum = $.trim($('#user-phone-num').val()),
+            securityCode = $.trim($('#security-code').val()),
+            $robTicketButton = $(this);
+            modal = new Modal();
+
+        if (!userName.length) {
+            modal.open('请输入您的姓名');
+            return false;
+        } else if (!userNameReg.test(userName)) {
+            modal.open('姓名格式不正确，最少2个中文或英文字符');
+            return false;
+        } else if (!userPhoneNum.length) {
+            modal.open('请输入您的手机号');
+            return false;
+        } else if (!userPhoneNumReg.test(userPhoneNum)) {
+            modal.open('手机号格式不正确，请检查');
+            return false;
+        } else if (!securityCode.length) {
+            modal.open('请输入您的验证码');
+            return false;
+        } else if (!securityCodeReg.test(securityCode)) {
+            modal.open('验证码格式不正确，6位数字，请检查');
+            return false;
+        } else {
+            service.startRobTicket({
+                wu_phone: userPhoneNum,
+                wu_name: userName,
+                wu_openid: openId,
+                wu_code: securityCode
+            }, function() {
+                setButtonDisabled($robTicketButton);
+            }, function(data, textStatus, jqXHR) {
+                if (data) {
+                    switch (data.status) {
+                        case 1:
+                            window.location.href = './activity_lottery.html';
+                            break;
+                        case 3:
+                            modal.open('用户手机号不合法');
+                            break;
+                        case 4:
+                            modal.open('手机号已被注册');
+                            break;
+                        case 5:
+                            modal.open('验证码有误');
+                            break;
+                        case 7:
+                            modal.open('注册失败');
+                            break;
+                        default:
+                            break;
                     }
-                }, function(jqXHR, textStatus, error) {
+                }
+            }, function(jqXHR, textStatus, error) {
 
-                }, function() {
-                    setButtonEnabled($robTicketButton);
-                });
-            }
-
-
-            function setButtonDisabled($button) {
-                $button.attr('disabled', 'disabled');
-            }
-
-            function setButtonEnabled($button) {
-                $button.removeAttr('disabled');
-            }
-
-        });
-
-        $('#security-code-btn').click(function(e) {
-            var $securityCodeBtn = $(this),
-                second = 60,
-                timer = null,
-                userPhoneNum = $.trim($('#user-phone-num').val());
-
-            if (!userPhoneNum.length) {
-                modal.open('请输入您的手机号');
-                return false;
-            } else if (!userPhoneNumReg.test(userPhoneNum)) {
-                modal.open('手机号格式不正确，请检查');
-                return false;
-            } else {
-                service.getSecurityCode({
-                    wu_openid: openId,
-                    wu_phone: userPhoneNum,
-                }, function() {
-                    setSecurityCodeBtnDisabled($securityCodeBtn, second);
-                    timer = setInterval(function() {
-                        second--;
-                        $securityCodeBtn.text(second + 's');
-                        if(!second) {
-                            setSecurityCodeBtnEnable($securityCodeBtn);
-                            clearInterval(timer);
-                        }
-                    }, 1000);
-                }, function(data, textStatus, jqXHR) {
-                    if(data) {
-                        switch(data.status) {
-                            case 1:
-                                modal.open('发送验证码成功');
-                                break;
-                            case 2:
-                                modal.open('用户手机号不合法');
-                                break;
-                            case 3:
-                                modal.open('手机号已被注册');
-                                break;
-                            default:
-                                modal.open('发送验证码失败');
-                                break;
-                        }
-                    }
-                }, function(jqXHR, textStatus, error) {
-                    // modal.open(JSON.stringify(textStatus));
-                    // modal.open(JSON.stringify(error));
-                });
-            }
-        });
-
-
-        function setSecurityCodeBtnEnable($button, timer) {
-            $button.removeAttr('disabled')
-                .text('获取验证码');
+            }, function() {
+                setButtonEnabled($robTicketButton);
+            });
         }
 
-        function setSecurityCodeBtnDisabled($button, second) {
-            $button.attr('disabled', 'disabled')
-                .text(second + 's');
+
+        function setButtonDisabled($button) {
+            $button.attr('disabled', 'disabled');
         }
 
-        $('input').focus(function(e) {
-            $('body').css('background-size', '100%');
-        });
-
-        $('input').blur(function(e) {
-            $('body').css('background-size', '100% 100%');
-        });
+        function setButtonEnabled($button) {
+            $button.removeAttr('disabled');
+        }
 
     });
+
+    $('#security-code-btn').click(function(e) {
+        var $securityCodeBtn = $(this),
+            second = 60,
+            timer = null,
+            userPhoneNum = $.trim($('#user-phone-num').val()),
+            modal = new Modal();
+
+        if (!userPhoneNum.length) {
+            modal.open('请输入您的手机号');
+            return false;
+        } else if (!userPhoneNumReg.test(userPhoneNum)) {
+            modal.open('手机号格式不正确，请检查');
+            return false;
+        } else {
+            service.getSecurityCode({
+                wu_openid: openId,
+                wu_phone: userPhoneNum,
+            }, function() {
+                setSecurityCodeBtnDisabled($securityCodeBtn, second);
+                timer = setInterval(function() {
+                    second--;
+                    $securityCodeBtn.text(second + 's');
+                    if (!second) {
+                        setSecurityCodeBtnEnable($securityCodeBtn);
+                        clearInterval(timer);
+                    }
+                }, 1000);
+            }, function(data, textStatus, jqXHR) {
+                if (data) {
+                    switch (data.status) {
+                        case 1:
+                            modal.open('发送验证码成功');
+                            break;
+                        case 2:
+                            modal.open('用户手机号不合法');
+                            break;
+                        case 3:
+                            modal.open('手机号已被注册');
+                            break;
+                        default:
+                            modal.open('发送验证码失败');
+                            break;
+                    }
+                }
+            }, function(jqXHR, textStatus, error) {
+                // modal.open(JSON.stringify(textStatus));
+                // modal.open(JSON.stringify(error));
+            });
+        }
+    });
+
+
+    function setSecurityCodeBtnEnable($button, timer) {
+        $button.removeAttr('disabled')
+            .text('获取验证码');
+    }
+
+    function setSecurityCodeBtnDisabled($button, second) {
+        $button.attr('disabled', 'disabled')
+            .text(second + 's');
+    }
+
+    $('input').focus(function(e) {
+        $('body').css('background-size', '100%');
+    });
+
+    $('input').blur(function(e) {
+        $('body').css('background-size', '100% 100%');
+    });
+
+});
 </script>
+
 </html>

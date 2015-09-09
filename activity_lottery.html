@@ -199,19 +199,16 @@
 
             rockerAnimate: function() {
                 var timer = null,
-                    $rockerEl = $('#rocker-ball').parent();
+                    $rockerEl = $('#rocker-ball').parent(),
+                    className = 'animating';
 
-                $rockerEl.css({
-                    'background-image': 'url(images/rocker-animate.gif)',
-                    'background-position': '0 -22px'
-                });
+                if(!$rockerEl.hasClass(className)) {
+                    $rockerEl.addClass(className);
+                }
                 timer = setTimeout(function() {
-                    $rockerEl.css({
-                        'background-image': 'url(images/rockers.png)',
-                        'background-position': '0 0'
-                    });
+                    $rockerEl.removeClass(className);
                     clearTimeout(timer);
-                }, 500);
+                }, 800);
                 return this;
             },
 
@@ -239,7 +236,7 @@
             }
 
         };
-        Machine.init();
+        Machine.init().rockerAnimate();
 
         $(".slotMachineButton").click(function(e) {
             var target = e.target,

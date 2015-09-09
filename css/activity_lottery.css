@@ -1,6 +1,7 @@
 body {
-    background: url(../images/bg3.jpg) no-repeat;
+    background: url(../images/bg3.png) no-repeat;
     background-size: 100% 100%;
+    overflow-y: auto;
 }
 
 .activity_intro {
@@ -117,14 +118,21 @@ header {
 
 .rocker {
     position: absolute;
-    right: -21px;
+    right: -26px;
     top: -14px;
     width: 50px;
-    height: 100px;
-    background: url(../images/rockers.png) no-repeat;
+    height: 140px;
+    background: url(../images/rocker.png) no-repeat;
     background-position: 0 0;
-    background-size: 100%;
+    background-size: 80%;
     z-index: 100;
+}
+.rocker.animating{
+    right: -18px;
+    top: -42px;
+    background-image: url(../images/rocker-animate.gif);
+    background-position: 0 0;
+    background-size: 110%;
 }
 
 .rocker-ball {
