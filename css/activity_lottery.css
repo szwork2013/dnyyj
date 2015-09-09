@@ -1,0 +1,249 @@
+body,
+    p,
+    ul,
+    ol,
+    h3 {
+        margin: 0;
+        padding: 0;
+    }
+
+    html,
+    body {
+        width: 100%;
+        height: 100%;
+        min-width: 320px;
+        overflow: hidden;
+        font-family: Microsoft Yahei;
+    }
+
+    body {
+        background: url(../images/bg3.jpg) no-repeat;
+        background-size: 100% 100%;
+    }
+
+    ul, ol{
+        list-style-type: none;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    .activity_intro {
+        display: table;
+        float: right;
+        width: 60px;
+        height: 60px;
+        margin-right: 10px;
+        background-color: #ff30a4;
+        color: #fff;
+        border-radius: 50%;
+        text-align: center;
+    }
+
+    .activity_intro > p {
+        display: table-cell;
+        vertical-align: middle;
+    }
+
+    header {
+        padding-top: 12%;
+        overflow: hidden;
+    }
+
+    .activity_sct {
+        text-align: center;
+        padding: 0 10px;
+    }
+
+    .activity_sct > h3 {
+        color: #7466c5;
+        font-weight: normal;
+        margin-bottom: 10px;
+    }
+
+    .activity_list{
+        -webkit-tap-highlight-color: transparent;
+    }
+    .activity_list > li {
+        float: left;
+        width: 45%;
+        height: 60px;
+        margin-right: 10%;
+        margin-bottom: 10px;
+        background-color: #7466c5;
+    }
+
+    .activity_list > li.active{
+        background-color: #ff30a4;
+    }
+    .activity_list > li:active{
+        background-color: #5a4f99;
+    }
+
+    .activity_list > li:nth-child(2n) {
+        margin-right: 0;
+    }
+
+    .activity_list > li > p {
+        color: #fff;
+        line-height: 30px;
+        font-size: 18px;
+    }
+
+    .activity_lottery {
+        padding: 0 10px;
+        margin-top: 10px;
+    }
+
+    .clearfix:after {
+        content: '';
+        display: block;
+        height: 0;
+        visibility: hidden;
+        clear: both;
+    }
+
+    .activity-lottery-machine {
+        position: relative;
+        padding: 0 10px;
+        height: 110px;
+        background: url(../images/slot-machine-main.png) no-repeat center;
+        background-size: contain;
+    }
+
+    .btn {
+        float: left;
+        width: 48%;
+        height: 42px;
+        line-height: 42px;
+        background-color: #ff30a4;
+        color: #fff;
+        text-align: center;
+        -webkit-tap-highlight-color: #e22790;
+    }
+
+    .btn:active {
+        background-color: #e22790;
+    }
+
+    .btn:nth-child(1) {
+        margin-right: 4%;
+    }
+
+    .activity-lottery-btn-group {
+        margin-top: 5px;
+    }
+
+    .activity-machine-container {
+        position: relative;
+        width: 260px;
+        padding-top: 26px;
+        padding-left: 24px;
+        margin: 0 auto;
+    }
+
+    .rocker{
+        position: absolute;
+        right: -21px;
+        top: -14px;
+        width: 50px;
+        height: 100px;
+        background: url(../images/rockers.png) no-repeat;
+        background-position: 0 0;
+        background-size: 100%;
+        z-index: 100;
+    }
+
+    .rocker-ball{
+        display: block;
+        width: 30px;
+        height: 30px;
+        margin: 10px auto 0;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    .slotMachine {
+        display: inline-block;
+        width: 60px;
+        height: 70px;
+        overflow: hidden;
+        text-align: center;
+        background: url(../images/icon-machine-square.png) no-repeat center;
+        background-size: 110%;
+    }
+
+    .slotMachine:not(:last-child) {
+        margin-right: 20px;
+    }
+
+    .slotMachine .slot {
+        height: 70px;
+        background-position: 50%;
+        background-repeat: no-repeat;
+        background-size: 80%;
+    }
+
+    .slotMachine .slot.slot2{
+        background-size: 50%;
+    }
+
+    .slot1 {
+        background-image: url("../images/icon-cd.png");
+    }
+
+    .slot2 {
+        background-image: url("../images/icon-sound-byte.png");
+    }
+
+    .slot3 {
+        background-image: url("../images/iocn-ticket-music.png");
+    }
+
+    .modal-content{
+        color: #fff;
+        margin-bottom: 10px;
+    }
+
+    .f-pink{
+        color: #ff30a4;
+    }
+    .f-s18{
+        font-size: 18px;
+    }
+
+    .modal-content.activity_rules{
+        text-align: left;
+    }
+
+    .modal-content.activity_rules > h3{
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+
+    .modal-content.activity_rules ol {
+        margin-bottom: 40px;
+    }
+    .modal-content.activity_rules li {
+        font-size: 14px;
+    }
+
+    .activity_share{
+        float:right;
+        width: 232px;
+        height: 144px;
+        margin-top: 20px;
+        margin-right: 6px;
+        background: url(../images/icon-share.png) no-repeat right;
+        background-size: 70%;
+    }
+    #bgMusic{
+        width: 0;
+        height: 0;
+        opacity: 0;
+    }
+
+
+    .f-bold{
+        font-weight: bold;
+    }

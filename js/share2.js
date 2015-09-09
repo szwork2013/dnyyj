@@ -1,4 +1,3 @@
-var wexinoptions ={};
 
 $.ajax({
     url:"http://h5.a.rongyi.com/activity/api/jsToken/default",
@@ -20,7 +19,8 @@ $.ajax({
             jsApiList: ["onMenuShareTimeline","onMenuShareAppMessage","onMenuShareQQ","onMenuShareWeibo"] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
         });
         wx.ready(function () {
-             
+
+           
             var img='http://h5.a.rongyi.com/html/legend/dnyyj/images/share.jpg';
 
             var redirectUrl = 'http://h5.a.rongyi.com/html/legend/dnyyj/index.html';
@@ -30,23 +30,31 @@ $.ajax({
             var title = "2015大宁音乐季，抢票正当时！";
 
             var desc='感受零距离的“星”现场！偶像近在咫尺！';
-            //朋友圈
+
+
             wx.onMenuShareTimeline({
                 title: title, // 分享标题
                 link: link, // 分享链接
                 imgUrl: img,
                 success: function () {
                     // 用户确认分享后执行的回调函数
-                    if(wexinoptions.sharecallback){
-                        wexinoptions.sharecallback();
-                    }
-                },
-                cancel: function () { 
-                    // 用户取消分享后执行的回调函数
-                   if(wexinoptions.modal){
-                        if(wexinoptions.modal.getState()=="opened"){
-                            wexinoptions.modal.close();
+                    $.ajax({
+                          url: "http://h5.a.rongyi.com/pactivity/ticket/web/index.php?r=weixin%2Fshare",
+                          dataType: 'json',
+                          type:"post",
+                          timeout: 8000,
+                          data: "wu_openid="+openId,
+                          success: function(data) {
+                            if(Modal){
+                                Modal.destroy();
+                            }
                         }
+                    });
+                },
+                cancel: function () {
+                    // 用户取消分享后执行的回调函数
+                    if(Modal){
+                        Modal.destroy();
                     }
                 }
             });
@@ -61,24 +69,29 @@ $.ajax({
                 dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
                 success: function () {
                     // 用户确认分享后执行的回调函数
-                    if(wexinoptions.sharecallback){
-                        wexinoptions.sharecallback();
-                    }
+                    // 用户确认分享后执行的回调函数
+                    $.ajax({
+                          url: "http://h5.a.rongyi.com/pactivity/ticket/web/index.php?r=weixin%2Fshare",
+                          dataType: 'json',
+                          type:"post",
+                          timeout: 8000,
+                          data: "wu_openid="+openId,
+                          success: function(data) {
+                            if(Modal){
+                                Modal.destroy();
+                            }
+                        }
+                    });
                 },
                 cancel: function () {
+
                     // 用户取消分享后执行的回调函数
-                    if(wexinoptions.modal){
-                       if(wexinoptions.modal.getState()=="opened"){
-                            wexinoptions.modal.close();
-                        }
+                    if(Modal){
+                        Modal.destroy();
                     }
                 }
             });
         });
-    }, 
+    },
     error:function(a,b,c){}
-}); 
-
-
-
-                    
+});

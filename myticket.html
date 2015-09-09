@@ -20,6 +20,8 @@
     <script type="text/javascript" src="js/jquery-1.10.1.min.js"></script>
     <script type="text/javascript" src="js/audio.js"></script>
     <script src="js/remodal.min.js"></script>
+    <script src="js/ewm.js"></script>
+
     <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
     <script src="js/share.js"></script>
     <script type="text/javascript" src="../../public/lib/openid.js"></script>
@@ -32,9 +34,10 @@
 
 <body style="overflow:auto;height:100%">
     <div class='mt-container' style="overflow:auto;width:100%;position:relative">
-        <div id="maindv" style="height:60%;margin-top:19%">
-            <div style="height:8%;text-align:center">
-                <img  style="height:60%" src="images/djckxq.png">
+        <div id="maindv" style="height:67%;margin-top:23%">
+            <div style="height:6%;text-align:center;margin-bottom:5px;font-weight:bold;font-size:20px;color:#ff30a4;">
+                <!-- 点击场次查看门票 -->
+                <img  style="height:90%" src="images/djckxq.png">
             </div>
             <div class="tbtn" >
                 <img id='btn1' src="images/btn1.jpg">
@@ -48,17 +51,20 @@
             <div class="tbtn">
                 <img id='btn4'  src="images/btn4.jpg">
             </div>
+            <div style="text-align:center;height:30px">
+                <img style="width:70%"  src="images/tban.png">
+        </div>
         </div>
 
-        <div id="dpn1" style="height:60%;margin-top:20%;display:none">
-            <div style="height:20%;text-align:center">
-                <img  style="height:80%" src="images/gxhd.png">
+        <div id="dpn1" class="tcon">
+            <div class='topdv'>
+                <img  style="height:100%" src="images/gxhd.png">
             </div>
-            <div style="color:#ff30a4;font-size:16px;text-align:center;line-height:20px">
+            <div class='top2dv'>
                 <div>2015大宁音乐季</div>
                 <div>戴佩妮专场</div>
             </div>
-             <div style="text-align:center;height:50%">
+            <div class="guizedv">
                 <img style="height:100%" src="images/tick1con.png">
             </div>
             <div style="color:#ff30a4;font-size:13px;width:80%;margin:auto;line-height:20px;display:none">
@@ -83,15 +89,147 @@
                 <p>4、进入内场区不得携带食物及饮料入内（瓶装饮料除外），禁止吸烟；</p>
                 <p>5、主办方可在法律允许的范围内对规则做适当调整。</p>
             </div>
-            <div style="text-align:center;margin-top:10px">
-                <img style="height:80px" src="images/ewm_dpn.png">
+            <div id='ewm_dpn' class="ewmimg">
+               
             </div>
-            <div style="color:#ff30a4;font-size:12px;width:80%;margin:auto;padding-left:20px;line-height:15px;text-align:center">
-                <p>本券为大宁音乐季门票二维码进场前</p>
-                <p>请出示此二维码</p>
+            <div class='bodv'>
+                <div>本券为大宁音乐季门票二维码</div>
+                <div>进场前请出示此二维码</div>
             </div>
             <div style="text-align:center">
-                <button data-remodal-action="confirm" class="remodal-confirm">关闭</button>
+                <button id="btnc1" style="font-weight:bold;font-size:20px;background-color:#ff30a4;width:80%" >关闭</button>
+            </div>
+        </div>
+        <div id="dpn2" class="tcon">
+            <div class='topdv'>
+                <img  style="height:100%" src="images/gxhd.png">
+            </div>
+            <div  class='top2dv'>
+                <div>2015大宁音乐季</div>
+                <div>EXIT专场</div>
+            </div>
+            <div  class="guizedv">
+                <img style="height:100%" src="images/tick2con.png">
+            </div>
+            <div style="color:#ff30a4;font-size:13px;width:80%;margin:auto;line-height:20px;display:none">
+                <div class="t2-span">
+                    <img  src="images/tickno.png">
+                    <span>时间：2015年10月17日 星期六 19:00</span>
+                </div>
+                <div class="t2-span">
+                    <img style="height:20px" src="images/tickno.png">
+                    <span>地点：大宁国际商业广场 中央广场</span>
+                </div>
+                <div class="t2-span">
+                    <img  src="images/tickno.png">
+                    <span>规则</span>
+                </div>
+            </div> 
+            <div style="color:#ff30a4;font-size:10px;width:80%;margin:auto;padding-left:20px;line-height:13px;display:none">
+                <div>1、本券仅作为规定场地演出内场券使用，当日有效，不得用作其他用途；</div>
+                <div>2、门票转发、截图无效。一人一张，凭票入场；</div>
+                <div>2、本券不得兑换现金，不找零；</div>
+                <div>3、演出开场五分钟后停止检票，不得进入内场区；</div>
+                <div>4、进入内场区不得携带食物及饮料入内（瓶装饮料除外），禁止吸烟；</div>
+                <div>5、主办方可在法律允许的范围内对规则做适当调整。</div>
+            </div>
+            <div id='ewm_exit' class="ewmimg">
+                
+            </div>
+            <div class='bodv'>
+                <div>本券为大宁音乐季门票二维码</div>
+                <div>进场前请出示此二维码</div>
+            </div>
+            <div style="text-align:center">
+                <button  id="btnc2" style="font-weight:bold;font-size:20px;background-color:#ff30a4;width:80%">关闭</button>
+            </div>
+        </div>
+        <div id="dpn3" class="tcon">
+            <div class='topdv'>
+                <img  style="height:100%" src="images/gxhd.png">
+            </div>
+            <div  class='top2dv'>
+                <div>2015大宁音乐季</div>
+                <div>安来宁、甜品店、昆曲专场</div>
+            </div>
+            <div  class="guizedv">
+                <img style="height:100%" src="images/tick3con.png">
+            </div>
+            <div style="color:#ff30a4;font-size:13px;width:80%;margin:auto;line-height:20px;display:none">
+                <div class="t2-span">
+                    <img  src="images/tickno.png">
+                    <span>时间：2015年10月17日 星期六 19:00</span>
+                </div>
+                <div class="t2-span">
+                    <img style="height:20px" src="images/tickno.png">
+                    <span>地点：大宁国际商业广场 中央广场</span>
+                </div>
+                <div class="t2-span">
+                    <img  src="images/tickno.png">
+                    <span>规则</span>
+                </div>
+            </div>
+            <div style="color:#ff30a4;font-size:10px;width:80%;margin:auto;padding-left:20px;line-height:10px;display:none">
+                <p>1、本券仅作为规定场地演出内场券使用，当日有效，不得用作其他用途；</p>
+                <p>2、门票转发、截图无效。一人一张，凭票入场；</p>
+                <p>2、本券不得兑换现金，不找零；</p>
+                <p>3、演出开场五分钟后停止检票，不得进入内场区；</p>
+                <p>4、进入内场区不得携带食物及饮料入内（瓶装饮料除外），禁止吸烟；</p>
+                <p>5、主办方可在法律允许的范围内对规则做适当调整。</p>
+            </div>
+            <div id='ewm_ann' class="ewmimg">
+                
+            </div>
+            <div class='bodv'>
+                <div>本券为大宁音乐季门票二维码</div>
+                <div>进场前请出示此二维码</div>
+            </div>
+            <div style="text-align:center">
+                <button  id="btnc3" style="font-weight:bold;font-size:20px;background-color:#ff30a4;width:80%">关闭</button>
+            </div>
+        </div>
+        <div id="dpn4" class="tcon">
+            <div class='topdv'>
+                <img  style="height:100%" src="images/gxhd.png">
+            </div>
+            <div  class='top2dv'>
+                <div>2015大宁音乐季</div>
+                <div>熊天平专场</div>
+            </div>
+             <div  class="guizedv">
+                <img style="height:100%" src="images/tick4con.png">
+            </div>
+            <div style="color:#ff30a4;font-size:13px;width:80%;margin:auto;line-height:20px;display:none">
+                <div class="t2-span">
+                    <img  src="images/tickno.png">
+                    <span>时间：2015年10月17日 星期六 19:00</span>
+                </div>
+                <div class="t2-span">
+                    <img style="height:20px" src="images/tickno.png">
+                    <span>地点：大宁国际商业广场 中央广场</span>
+                </div>
+                <div class="t2-span">
+                    <img  src="images/tickno.png">
+                    <span>规则</span>
+                </div>
+            </div>
+            <div style="color:#ff30a4;font-size:10px;width:80%;margin:auto;padding-left:20px;line-height:10px;display:none">
+                <p>1、本券仅作为规定场地演出内场券使用，当日有效，不得用作其他用途；</p>
+                <p>2、门票转发、截图无效。一人一张，凭票入场；</p>
+                <p>2、本券不得兑换现金，不找零；</p>
+                <p>3、演出开场五分钟后停止检票，不得进入内场区；</p>
+                <p>4、进入内场区不得携带食物及饮料入内（瓶装饮料除外），禁止吸烟；</p>
+                <p>5、主办方可在法律允许的范围内对规则做适当调整。</p>
+            </div>
+            <div id='ewm_xtp' class="ewmimg">
+                
+            </div>
+            <div class='bodv'>
+                <div>本券为大宁音乐季门票二维码</div>
+                <div>进场前请出示此二维码</div>
+            </div>
+            <div style="text-align:center">
+                <button id="btnc4" style="font-weight:bold;font-size:20px;background-color:#ff30a4;width:80%">关闭</button>
             </div>
         </div>
     </div>
@@ -115,37 +253,138 @@
         <p>分享这个好消息，增加一次抽奖机会吧~</p>
     </div>
 </script>
+<script id="templateUseout" type="text/x-template">
+    <div class="dpncontent clear">
+        
+        <p style="clear:both;"></p>
+        <p style='color:#fff;margin-top:50%'>今天3次机会已经用完</p>
+        
+    </div>
+</script>
 <script>
     var modalInstance=null;
     var tdata = null;
+    wexinoptions = {
+        sharecallback:function(){
+            $.ajax({
+                  url: "http://h5.a.rongyi.com/pactivity/ticket/web/index.php?r=weixin%2Fshare",
+                  dataType: 'json',
+                  type:"post",
+                  timeout: 8000,
+                  data: "wu_openid="+openId,
+                  success: function(data) {
+                    if(wexinoptions.callbackUrl){
+                        window.location.href=wexinoptions.callbackUrl;
+                    }
+                    if(wexinoptions.modal){
+                        wexinoptions.modal.close();
+                    }
+                   }
+            });
+
+        },
+       callbackUrl:"activity_lottery.html"
+    };
 
     function showCj(){
-         var ele = $("<div class='tishixinxi'><p>您还没有获得门票，</p><p>继续努力吧!</p><button id='jxbtn' style='background-color:#ff30a4'>继续抽奖</button></div>");
+         var ele = $("<div class='tishixinxi'><div style='height:20%'><img style='height:50px' src='images/jxll.png'></div><button id='jxbtn' style='background-color:#ff30a4;margin-top:10%;width:80%'>继续抽奖</button><button id='gbbtn' style='background-color:#ff30a4;margin-top:10px;width:80%'>关闭</button></div>");
                     ele.appendTo($(".mt-container"));
                     ele.find("#jxbtn").click(function(){
-                        if(modalInstance ==null){
-                            modalInstance = $('[data-remodal-id=modal]')
-                                .prepend($('#templateA').html())
-                                .css({
-                                    'position': 'absolute',
-                                    'right': '0'
-                                })
-                                .remodal({
-                                    closeOnOutsideClick: false
-                                })
-                        }else{
-                            
-                        }
-                        modalInstance.open();
+                         //判断是否可以抽奖
+                         $.ajax({
+                              url: "  http://h5.a.rongyi.com/pactivity/ticket/web/index.php?r=weixin%2Fchance",
+                              dataType: 'json',
+                              type:"post",
+                              timeout: 8000,  
+                              data: "wt_openid="+openId,
+                              success: function(data) {
+                               if(data.status==1 || data.status==2){
+                                    //可以继续抽奖
+                                    //需要分享获得机会
+                                    if(modalInstance ==null){
+                                        modalInstance = $('[data-remodal-id=modal]')
+                                            .prepend($('#templateA').html())
+                                            .css({
+                                                'position': 'absolute',
+                                                'right': '0'
+                                            })
+                                            .remodal({
+                                                closeOnOutsideClick: false
+                                            })
+                                    }else{
+                                        
+                                    }
+                                    if(data.status==1){
+                                        
+                                    }
+                                    modalInstance.open();
+                                    wexinoptions.modal = modalInstance;
+                                }else if(data.status==3){
+                                    //今天3次机会已经用完
+                                    if(modalInstance ==null){
+                                        modalInstance = $('[data-remodal-id=modal]')
+                                            .prepend($('#templateUseout').html())
+                                            .css({
+                                                'position': 'absolute',
+                                                'right': '0'
+                                            })
+                                            .remodal({
+                                                closeOnOutsideClick: false
+                                            })
+                                    }else{
+                                        
+                                    }
+                                    modalInstance.open();
+                               }
+                            }
+                        });
+                        
+                    });
+
+                    ele.find("#gbbtn").click(function(){
+                        $(".tishixinxi").hide();
+                        $("#maindv").show();
                     });
     }
+
+    function createEwm(activityid,eid){
+        if($("#"+eid).children().length==0){
+            //设置内容为当前url路径
+            qrCode.jsonData.content =  "http://www.baidu.com/?openId="+openId+"&activityid="+activityid;
+            //设置宽度尺寸
+            qrCode.jsonData.w =  100;
+            //设置外边框距
+            qrCode.jsonData.m =  5;
+            //在id为qrcode的元素下生成二维码图片
+            qrCode.getQrcode(eid);
+        }
+
+    }
+
     $(document).ready(function(){
-        addOneTimeShare();
-        openId = "o8OK2jppuieOX8XTO9INGq6NE5p4";
+
+        
+        
+        $("#btnc1").click(function(){
+            $("#dpn1").hide();
+            $("#maindv").show();
+        });
+        $("#btnc2").click(function(){
+            $("#dpn2").hide();
+            $("#maindv").show();
+        });
+        $("#btnc3").click(function(){
+            $("#dpn3").hide();
+            $("#maindv").show();
+        });
+        $("#btnc4").click(function(){
+            $("#dpn4").hide();
+            $("#maindv").show();
+        });
 
         $("#btn1").click(function(){
-            if(!tdata){
-
+            
+            if(!tdata || tdata.length==0){
                 showCj();
                 $("#maindv").hide();
                 return;
@@ -155,6 +394,7 @@
                if(t.wt_activityid==1){
                     if(t.status==1){
                         $("#dpn1").show();
+                        createEwm(1,"ewm_dpn");
                     }else{
                         showCj();
                     }
@@ -163,24 +403,82 @@
             }
         });
 
-         $("#btn1").click(function(){
-
+        $("#btn2").click(function(){
+            if(!tdata|| tdata.length==0){
+                showCj();
+                $("#maindv").hide();
+                return;
+            }
+            for(var i=0;i<tdata.length;i++){
+               var t = tdata[i];
+               if(t.wt_activityid==2){
+                    if(t.status==1){
+                        $("#dpn2").show();
+                         createEwm(2,"ewm_exit");
+                    }else{
+                        showCj();
+                    }
+                    $("#maindv").hide();
+               }
+            }
         });
 
-          $("#btn1").click(function(){
+        $("#btn3").click(function(){
+             // $("#dpn3").show();
+             // $("#maindv").hide();
+             // createEwm(3,"ewm_ann");
+             // return;
+            if(!tdata|| tdata.length==0){
+                showCj();
+                $("#maindv").hide();
+                return;
+            }
 
+            for(var i=0;i<tdata.length;i++){
+               var t = tdata[i];
+               if(t.wt_activityid==3){
+
+                    if(t.status==1){
+                        
+                        $("#dpn3").show();
+                        createEwm(3,"ewm_ann");
+                    }else{
+                        showCj();
+                    }
+                    $("#maindv").hide();
+               }
+            }
         });
 
+        $("#btn4").click(function(){
+            if(!tdata|| tdata.length==0){
+                showCj();
+                $("#maindv").hide();
+                return;
+            }
+            for(var i=0;i<tdata.length;i++){
+               var t = tdata[i];
+               if(t.wt_activityid==4){
+                    if(t.status==1){
+                        $("#dpn4").show();
+                        createEwm(4,"ewm_xtp");
+                    }else{
+                        showCj();
+                    }
+                    $("#maindv").hide();
+               }
+            }
+        });
+        
         $.ajax({
               url: "http://h5.a.rongyi.com/pactivity/ticket/web/index.php?r=weixin%2Fmyticket",
               dataType: 'json',
               type:"post",
-              timeout: 8000,
+              timeout: 8000,  
               data: "wt_openid="+openId,
               success: function(data) {
-                
                 var tn = 0;
-                tdata = data;
+                tdata = data; 
             }
         });
 });

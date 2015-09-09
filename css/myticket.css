@@ -1,7 +1,7 @@
 .mt-container{
 	height: 100%;
 	width: 100%;
-	background-image: url('../images/mytbk.jpg');
+	background-image: url('../images/mytbk.png');
 	background-repeat: no-repeat;
 	background-size: 100% 100%;
 }
@@ -26,14 +26,58 @@
 }
 .tbtn{
 	text-align: center;
-	height: 26%;
+	height: 23%;
 
 }
 .tbtn img{
-	height: 80%;
+	width: 70%;
 }
 .t2-span img{
 	height: 20px;
 	float: left;
 	margin-right: 2px;
+}
+.tcon{
+	height:60%;
+	margin-top:16%;
+	display:none;
+}
+.topdv{
+	height:12%;
+	text-align:center;
+}
+.bodv{
+	color:#ff30a4;
+	font-size:9px;
+	margin:auto;
+	line-height:12px;
+	text-align:center;
+}
+.top2dv{
+	color:#ff30a4;
+	font-size:15px;
+	text-align:center;
+	line-height:20px;
+	font-weight:bold;
+	margin-top:5px;
+}
+.mpsj{
+	text-align:center;
+	margin-top:10px;
+	height:40%;
+}
+.guizedv{
+	text-align:center;
+	height:50%;
+	margin-top:2px;
+}
+
+.ewmimg{
+	 text-align:center;
+	 margin-top:10px;
+	 height: 40%;
+
+}
+.ewmimg img{
+	height: 100%;
 }

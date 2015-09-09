@@ -1,3 +1,18 @@
+@-webkit-keyframes buzz-out{
+  20% {
+    -webkit-transform: translateX(0px) rotate(8deg);
+  }
+  50% {
+    -webkit-transform: translateX(0px) rotate(-8deg);
+  }
+  70% {
+    -webkit-transform: translateX(0px) rotate(3deg);
+  }
+  100% {
+    -webkit-transform: translateX(0px) rotate(-3deg);
+  }
+  
+}
 *{
 	font-family: '微软雅黑';
 }
@@ -10,7 +25,17 @@ body{
 	width: 100%;
 	background-image: url('../images/daipeini.jpg');
 	background-repeat: no-repeat;
-	background-size: 100% ;
+	background-size: 100%;
+	background-position: center center;
+	background-color: rgb(235,241,247);
+}
+
+.sy-bj2{
+	height: 100%;
+	width: 100%;
+	background-image: url('../images/daipeini2.jpg');
+	background-repeat: no-repeat;
+	background-size: 100%;
 	background-position: center center;
 	background-color: rgb(235,241,247);
 }
@@ -25,6 +50,7 @@ button,.button{
 	font-size: 20px;
 	border:0px;
 	font-weight: bold;
+
 
 }
 
@@ -121,4 +147,11 @@ button,.button{
     -moz-opacity:0;  
     -khtml-opacity: 0;  
     opacity: 0;  
+}
+
+.shake{
+    -webkit-animation-name: buzz-out;
+    -webkit-animation-duration: 0.5s;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-iteration-count: 10000;
 }
