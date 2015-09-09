@@ -21,7 +21,6 @@
     <script type="text/javascript" src="js/audio.js"></script>
     <script src="js/remodal.min.js"></script>
     <script src="js/ewm.js"></script>
-
     <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
     <script src="js/share.js"></script>
     <script type="text/javascript" src="../../public/lib/openid.js"></script>
@@ -57,15 +56,15 @@
         </div>
 
         <div id="dpn1" class="tcon">
-            <div class='topdv'>
+            <!-- <div class='topdv'>
                 <img  style="height:100%" src="images/gxhd.png">
             </div>
             <div class='top2dv'>
                 <div>2015大宁音乐季</div>
                 <div>戴佩妮专场</div>
-            </div>
+            </div> -->
             <div class="guizedv">
-                <img style="height:100%" src="images/tick1con.png">
+                <img  src="images/tick1con.png">
             </div>
             <div style="color:#ff30a4;font-size:13px;width:80%;margin:auto;line-height:20px;display:none">
                 <div class="t2-span">
@@ -93,24 +92,23 @@
                
             </div>
             <div class='bodv'>
-                <div>本券为大宁音乐季门票二维码</div>
-                <div>进场前请出示此二维码</div>
+                <img src="images/botimg.png">
             </div>
             <div style="text-align:center">
                 <button id="btnc1" style="font-weight:bold;font-size:20px;background-color:#ff30a4;width:80%" >关闭</button>
             </div>
         </div>
         <div id="dpn2" class="tcon">
-            <div class='topdv'>
-                <img  style="height:100%" src="images/gxhd.png">
+            <div class='guizedv'>
+                <img  src="images/tick2con.png">
             </div>
-            <div  class='top2dv'>
+           <!--  <div  class='top2dv'>
                 <div>2015大宁音乐季</div>
                 <div>EXIT专场</div>
             </div>
             <div  class="guizedv">
                 <img style="height:100%" src="images/tick2con.png">
-            </div>
+            </div> -->
             <div style="color:#ff30a4;font-size:13px;width:80%;margin:auto;line-height:20px;display:none">
                 <div class="t2-span">
                     <img  src="images/tickno.png">
@@ -137,24 +135,23 @@
                 
             </div>
             <div class='bodv'>
-                <div>本券为大宁音乐季门票二维码</div>
-                <div>进场前请出示此二维码</div>
+                <img src="images/botimg.png">
             </div>
             <div style="text-align:center">
                 <button  id="btnc2" style="font-weight:bold;font-size:20px;background-color:#ff30a4;width:80%">关闭</button>
             </div>
         </div>
         <div id="dpn3" class="tcon">
-            <div class='topdv'>
-                <img  style="height:100%" src="images/gxhd.png">
+            <div class='guizedv'>
+                <img src="images/tick3con.png">
             </div>
-            <div  class='top2dv'>
+            <!-- <div  class='top2dv'>
                 <div>2015大宁音乐季</div>
                 <div>安来宁、甜品店、昆曲专场</div>
             </div>
             <div  class="guizedv">
                 <img style="height:100%" src="images/tick3con.png">
-            </div>
+            </div> -->
             <div style="color:#ff30a4;font-size:13px;width:80%;margin:auto;line-height:20px;display:none">
                 <div class="t2-span">
                     <img  src="images/tickno.png">
@@ -181,24 +178,23 @@
                 
             </div>
             <div class='bodv'>
-                <div>本券为大宁音乐季门票二维码</div>
-                <div>进场前请出示此二维码</div>
+                <img src="images/botimg.png">
             </div>
             <div style="text-align:center">
                 <button  id="btnc3" style="font-weight:bold;font-size:20px;background-color:#ff30a4;width:80%">关闭</button>
             </div>
         </div>
         <div id="dpn4" class="tcon">
-            <div class='topdv'>
-                <img  style="height:100%" src="images/gxhd.png">
+            <div class='guizedv'>
+                <img src="images/tick4con.png">
             </div>
-            <div  class='top2dv'>
+            <!-- <div  class='top2dv'>
                 <div>2015大宁音乐季</div>
                 <div>熊天平专场</div>
             </div>
              <div  class="guizedv">
                 <img style="height:100%" src="images/tick4con.png">
-            </div>
+            </div> -->
             <div style="color:#ff30a4;font-size:13px;width:80%;margin:auto;line-height:20px;display:none">
                 <div class="t2-span">
                     <img  src="images/tickno.png">
@@ -225,8 +221,7 @@
                 
             </div>
             <div class='bodv'>
-                <div>本券为大宁音乐季门票二维码</div>
-                <div>进场前请出示此二维码</div>
+                <img src="images/botimg.png">
             </div>
             <div style="text-align:center">
                 <button id="btnc4" style="font-weight:bold;font-size:20px;background-color:#ff30a4;width:80%">关闭</button>
@@ -364,8 +359,6 @@
     }
 
     $(document).ready(function(){
-
-        
         
         $("#btnc1").click(function(){
             $("#dpn1").hide();
@@ -385,7 +378,6 @@
         });
 
         $("#btn1").click(function(){
-            
             if(!tdata || tdata.length==0){
                 showCj();
                 $("#maindv").hide();
@@ -406,6 +398,7 @@
         });
 
         $("#btn2").click(function(){
+            
             if(!tdata|| tdata.length==0){
                 showCj();
                 $("#maindv").hide();
@@ -426,10 +419,8 @@
         });
 
         $("#btn3").click(function(){
-             // $("#dpn3").show();
-             // $("#maindv").hide();
-             // createEwm(3,"ewm_ann");
-             // return;
+            
+             
             if(!tdata|| tdata.length==0){
                 showCj();
                 $("#maindv").hide();

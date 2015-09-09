@@ -38,7 +38,7 @@
 	margin-right: 2px;
 }
 .tcon{
-	height:60%;
+	height:84%;
 	margin-top:16%;
 	display:none;
 }
@@ -52,6 +52,9 @@
 	margin:auto;
 	line-height:12px;
 	text-align:center;
+}
+.bodv img{
+	height: 25px;
 }
 .top2dv{
 	color:#ff30a4;
@@ -68,16 +71,21 @@
 }
 .guizedv{
 	text-align:center;
-	height:50%;
+	
 	margin-top:2px;
+}
+.guizedv img{
+	width:90%;
 }
 
 .ewmimg{
 	 text-align:center;
 	 margin-top:10px;
-	 height: 40%;
+	 width: 100%;
+	 height: 90px;
 
 }
 .ewmimg img{
 	height: 100%;
+	
 }
