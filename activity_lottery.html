@@ -7,9 +7,7 @@
     <link rel="stylesheet" href="css/remodal-default-theme.css">
     <link rel="stylesheet" href="css/remodal.css">
     <link rel="stylesheet" href="css/activity_lottery.css">
-
 </head>
-
 <body>
     <header>
         <div class="activity_intro">
@@ -420,8 +418,7 @@ $(function() {
         },
 
         destroy: function() {
-            //Modal.$modalElement.empty();
-            Modal.instance.close();
+            Modal.instance.destroy();
         }
     };
     Modal.init();
