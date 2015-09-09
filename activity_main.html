@@ -6,35 +6,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 	<link rel="stylesheet" href="css/remodal-default-theme.css">
     <link rel="stylesheet" href="css/remodal.css">
-    <script src="js/jquery-1.10.1.min.js"></script>
-	<script src="js/remodal.min.js"></script>
-	<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
-    <script type="text/javascript" src="../../public/lib/openid.js"></script>
-    <script type="text/javascript" src="js/share2.js"></script>
-
+    <link rel="stylesheet" href="css/activity_reset.css">
 	<style>
-	body, p, h2, h3, ol, ul{
-		margin: 0;
-		padding: 0;
-	}
-
-	a{
-		text-decoration: none;
-	}
-
-	ul, ol {
-		list-style: none;
-	}
-
-	html,body {
-		width: 100%;
-		height: 100%;
-		min-width: 320px;
-		overflow: hidden;
-		font-family: Microsoft Yahei;
-	}
-
-
 	body{
 		position: relative;
 		background: url(images/bg1.jpg) no-repeat;
@@ -123,32 +96,36 @@
 	</style>
 </head>
 <body>
-	<div class="activity-main-btn-group">
-		<a id="robTicketBtn" class="btn btn-m btn-pink">我要抢票</a>
-		<span>
-			<a class="btn btn-s btn-purple" href="./myticket.html">我的门票</a>
-			<a id="activityRulesModal" class="btn btn-s btn-purple">活动细则</a>
-		</span>
-	</div>
-	<div data-remodal-id="activityRulesModal" role="dialog" aria-labelledby="modalTitle" aria-describedby="modalDesc">
-			<div class="modal-content activity_rules">
-		        <h3>活动规则：</h3>
-		        <ol>
-		            <li>1、关注大宁国际官方微信(<i class="f-pink f-bold">LifeHub_DANING</i>)，回复关键词"抢票"获取抢票链接。</li>
-		            <li>2、输入基本信息，选择场次，按动开关，开始抽奖。摇出三个"2015大宁音乐季"字样，即可获得对应场次门票一张。</li>
-		            <li>3、每人每天最多三次抽奖机会，点击"继续抽奖"获取更多机会；</li>
-		            <li>4、所用参与抢票的用户，还将获得一次幸运中奖机会！我们将于10月8日公布幸运用户名单，详情可点击微信菜单栏【乐享大宁】/【大宁音乐季】查看；</li>
-		            <li>5、门票数量有限，一人一张，凭票入场，转发、截图无效。</li>
-		        </ol>
-		        <h3>
-		            抢票时间：<span class="f-pink">9月8日-10月7日</span>
-		        </h3>
-		    </div>
-		    <button data-remodal-action="confirm" class="remodal-confirm">关闭</button>
-		</div>
-</body>
+<div class="activity-main-btn-group">
+	<a id="robTicketBtn" class="btn btn-m btn-pink">我要抢票</a>
+	<span>
+		<a class="btn btn-s btn-purple" href="./myticket.html">我的门票</a>
+		<a id="activityRulesModal" class="btn btn-s btn-purple">活动细则</a>
+	</span>
+</div>
+<div data-remodal-id="activityRulesModal" role="dialog" aria-labelledby="modalTitle" aria-describedby="modalDesc">
+	<div class="modal-content activity_rules">
+        <h3>活动规则：</h3>
+        <ol>
+            <li>1、关注大宁国际官方微信(<i class="f-pink f-bold">LifeHub_DANING</i>)，回复关键词"抢票"获取抢票链接。</li>
+            <li>2、输入基本信息，选择场次，按动开关，开始抽奖。摇出三个"2015大宁音乐季"字样，即可获得对应场次门票一张。</li>
+            <li>3、每人每天最多三次抽奖机会，点击"继续抽奖"获取更多机会；</li>
+            <li>4、所用参与抢票的用户，还将获得一次幸运中奖机会！我们将于10月8日公布幸运用户名单，详情可点击微信菜单栏【乐享大宁】/【大宁音乐季】查看；</li>
+            <li>5、门票数量有限，一人一张，凭票入场，转发、截图无效。</li>
+        </ol>
+        <h3>
+            抢票时间：<span class="f-pink">9月8日-10月7日</span>
+        </h3>
+    </div>
+    <button data-remodal-action="confirm" class="remodal-confirm">关闭</button>
+</div>
+<script src="js/service.js"></script>
+<script src="js/jquery-1.10.1.min.js"></script>
+<script src="js/remodal.min.js"></script>
+<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script type="text/javascript" src="../../public/lib/openid.js"></script>
+<script type="text/javascript" src="js/share2.js"></script>
 <script>
-
 	$(function() {
 		$('#activityRulesModal').click(function() {
 			var modalInstance = $('[data-remodal-id=activityRulesModal]').remodal({
@@ -157,56 +134,6 @@
 			});
 			modalInstance.open();
 		});
-
-		var service = {
-
-            isRegisterUrl: 'http://h5.a.rongyi.com/pactivity/ticket/web/index.php?r=weixin%2Fislogin',
-
-            ajax: function(opts) {
-                var data = opts.data,
-                    onBefore = opts.onBefore,
-                    onSuccess = opts.onSuccess,
-                    onError = opts.onError,
-                    onComplete = opts.onComplete,
-                    url = opts.url;
-                $.ajax({
-                    url: url,
-                    type: 'POST',
-                    dataType: 'json',
-                    data: data,
-                    beforeSend: function() {
-                        if(typeof onBefore === 'function') {
-                            onBefore.call(this);
-                        }
-                    }.bind(this),
-                    success:function(data, textStatus, jqXHR) {
-                        if(typeof onSuccess === 'function') {
-                            onSuccess.call(this, data, textStatus, jqXHR);
-                        }
-                    }.bind(this),
-                    error: function(jqXHR, textStatus, error) {
-                        if(typeof onError === 'function') {
-                            onError.call(this, jqXHR, textStatus, error);
-                        }
-                    }.bind(this),
-                    complete: function() {
-                        if(typeof onComplete === 'function') {
-                            onComplete.call(this);
-                        }
-                    }.bind(this)
-                });
-            },
-
-            isRegister: function(data, onSuccess,onError) {
-                service.ajax({
-                    url: service.isRegisterUrl,
-                    data: data,
-                    onSuccess: onSuccess,
-                    onError: onError
-                });
-            }
-        };
-
 
     	$('#robTicketBtn').click(function(e) {
     		service.isRegister({
@@ -221,4 +148,5 @@
     	});
 	})
 </script>
+</body>
 </html>

@@ -20,13 +20,13 @@ $.ajax({
         });
         wx.ready(function () {
 
-           
+
             var img='http://h5.a.rongyi.com/html/legend/dnyyj/images/share.jpg';
 
             var redirectUrl = 'http://h5.a.rongyi.com/html/legend/dnyyj/index.html';
 
             var link='http://h5.a.rongyi.com/activity/ifsb37/index?url=' + encodeURIComponent(redirectUrl);
-            
+
             var title = "2015大宁音乐季，抢票正当时！";
 
             var desc='感受零距离的“星”现场！偶像近在咫尺！';
@@ -45,17 +45,14 @@ $.ajax({
                           timeout: 8000,
                           data: "wu_openid="+openId,
                           success: function(data) {
-                            if(Modal){
-                                Modal.destroy();
-                            }
+                            alert(typeof Modal);
+                            Modal.destroy();
                         }
                     });
                 },
                 cancel: function () {
                     // 用户取消分享后执行的回调函数
-                    if(Modal){
-                        Modal.destroy();
-                    }
+                    Modal.destroy();
                 }
             });
 
