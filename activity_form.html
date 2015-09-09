@@ -5,6 +5,8 @@
     <title>大宁商业国际广场</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="css/remodal-default-theme.css">
+    <link rel="stylesheet" href="css/remodal.css">
     <link rel="stylesheet" href="css/activity_reset.css">
     <style>
     body {
@@ -142,6 +144,10 @@
     .security-code-btn:active{
         background-color: #e22790;
     }
+    #msg{
+        padding-bottom: 10px;
+        border-bottom: 1px solid #ddd;
+    }
     </style>
 </head>
 
@@ -177,14 +183,41 @@
             <button id="rob-ticket-submit" class="submit-btn">开始抢票</button>
         </fieldset>
     </form>
+    <div data-remodal-id="modal" class="msg-alert" role="dialog" aria-labelledby="modalTitle" aria-describedby="modalDesc">
+        <p id="msg"></p>
+        <button data-remodal-action="confirm" class="remodal-confirm msg-alert-confirm"><span>确定</span></button>
+    </div>
 </body>
 <script src="js/jquery-1.10.1.min.js"></script>
+<script src="js/remodal.min.js"></script>
 <script type="text/javascript" src="js/share2.js"></script>
 <script src="js/service.js"></script>
 <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 <script type="text/javascript" src="../../public/lib/openid.js"></script>
 <script>
     $(function() {
+
+
+        function Modal(opts) {
+            if(typeof Modal.instance === 'object') {
+                return Modal.instance;
+            }
+
+            this.$el = opts && opts.$el || $("[data-remodal-id='modal']");
+            this.modalInstance = null;
+
+            Modal.instance = this;
+        }
+
+        Modal.prototype.open = function(msg) {
+            this.modalInstance = this.$el.find('#msg').text(msg).end().remodal({
+                                closeOnOutsideClick: false,
+                                hashTracking: false
+                             });
+            this.modalInstance.open();
+        };
+        var modal = new Modal();
+
 
         service.isRegister({
             wu_openid: openId
@@ -206,22 +239,22 @@
 
 
             if(!userName.length) {
-                alert('请输入您的姓名');
+                modal.open('请输入您的姓名');
                 return false;
             } else if (!userNameReg.test(userName)) {
-                alert('姓名格式不正确，最少2个中文或英文字符');
+                modal.open('姓名格式不正确，最少2个中文或英文字符');
                 return false;
             } else if (!userPhoneNum.length) {
-                alert('请输入您的手机号');
+                modal.open('请输入您的手机号');
                 return false;
             } else if (!userPhoneNumReg.test(userPhoneNum)) {
-                alert('手机号格式不正确，请检查');
+                modal.open('手机号格式不正确，请检查');
                 return false;
             } else if (!securityCode.length) {
-                alert('请输入您的验证码');
+                modal.open('请输入您的验证码');
                 return false;
             } else if(!securityCodeReg.test(securityCode)) {
-                alert('验证码格式不正确，6位数字，请检查');
+                modal.open('验证码格式不正确，6位数字，请检查');
                 return false;
             } else {
                 service.startRobTicket({
@@ -238,16 +271,16 @@
                                 window.location.href = './activity_lottery.html';
                                 break;
                             case 3:
-                                alert('用户手机号不合法');
+                                modal.open('用户手机号不合法');
                                 break;
                             case 4:
-                                alert('手机号已被注册');
+                                modal.open('手机号已被注册');
                                 break;
                             case 5:
-                                alert('验证码有误');
+                                modal.open('验证码有误');
                                 break;
                             case 7:
-                                alert('注册失败');
+                                modal.open('注册失败');
                                 break;
                             default:
                                 break;
@@ -278,10 +311,10 @@
                 userPhoneNum = $.trim($('#user-phone-num').val());
 
             if (!userPhoneNum.length) {
-                alert('请输入您的手机号');
+                modal.open('请输入您的手机号');
                 return false;
             } else if (!userPhoneNumReg.test(userPhoneNum)) {
-                alert('手机号格式不正确，请检查');
+                modal.open('手机号格式不正确，请检查');
                 return false;
             } else {
                 service.getSecurityCode({
@@ -301,22 +334,22 @@
                     if(data) {
                         switch(data.status) {
                             case 1:
-                                alert('发送验证码成功');
+                                modal.open('发送验证码成功');
                                 break;
                             case 2:
-                                alert('用户手机号不合法');
+                                modal.open('用户手机号不合法');
                                 break;
                             case 3:
-                                alert('手机号已被注册');
+                                modal.open('手机号已被注册');
                                 break;
                             default:
-                                alert('发送验证码失败');
+                                modal.open('发送验证码失败');
                                 break;
                         }
                     }
                 }, function(jqXHR, textStatus, error) {
-                    // alert(JSON.stringify(textStatus));
-                    // alert(JSON.stringify(error));
+                    // modal.open(JSON.stringify(textStatus));
+                    // modal.open(JSON.stringify(error));
                 });
             }
         });
