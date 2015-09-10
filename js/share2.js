@@ -45,6 +45,7 @@ $.ajax({
                           timeout: 8000,
                           data: "wu_openid="+openId,
                           success: function(data) {
+                            service.visitCount(4);
                             if(Modal){
                                 Modal.destroy();
                             }
@@ -77,6 +78,7 @@ $.ajax({
                           timeout: 8000,
                           data: "wu_openid="+openId,
                           success: function(data) {
+                            service.visitCount(4);
                             if(Modal){
                                 Modal.destroy();
                             }
@@ -84,7 +86,6 @@ $.ajax({
                     });
                 },
                 cancel: function () {
-
                     // 用户取消分享后执行的回调函数
                     if(Modal){
                         Modal.destroy();

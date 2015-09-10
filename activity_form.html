@@ -127,6 +127,10 @@
         background-color: #777576;
     }
 
+    .security-code-btn:disabled:active{
+        background-color: #777576;
+    }
+
     .security-code-btn:active {
         background-color: #e22790;
     }
@@ -217,6 +221,7 @@ $(function() {
             hashTracking: false
         });
         this.modalInstance.open();
+        $('.remodal-overlay').css('background-color', 'rgba(0, 0, 0, 0.3)');
     };
 
     Modal.prototype.destroy = function() {

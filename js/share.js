@@ -20,13 +20,13 @@ $.ajax({
             jsApiList: ["onMenuShareTimeline","onMenuShareAppMessage","onMenuShareQQ","onMenuShareWeibo"] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
         });
         wx.ready(function () {
-             
+
             var img='http://h5.a.rongyi.com/html/legend/dnyyj/images/share.jpg';
 
             var redirectUrl = 'http://h5.a.rongyi.com/html/legend/dnyyj/index.html';
 
             var link='http://h5.a.rongyi.com/activity/ifsb37/index?url=' + encodeURIComponent(redirectUrl);
-            
+
             var title = "2015大宁音乐季，抢票正当时！";
 
             var desc='感受零距离的“星”现场！偶像近在咫尺！';
@@ -37,11 +37,12 @@ $.ajax({
                 imgUrl: img,
                 success: function () {
                     // 用户确认分享后执行的回调函数
+                    service.visitCount(3);
                     if(wexinoptions.sharecallback){
                         wexinoptions.sharecallback();
                     }
                 },
-                cancel: function () { 
+                cancel: function () {
                     // 用户取消分享后执行的回调函数
                    if(wexinoptions.modal){
                         if(wexinoptions.modal.getState()=="opened"){
@@ -61,6 +62,7 @@ $.ajax({
                 dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
                 success: function () {
                     // 用户确认分享后执行的回调函数
+                    service.visitCount(3);
                     if(wexinoptions.sharecallback){
                         wexinoptions.sharecallback();
                     }
@@ -75,10 +77,10 @@ $.ajax({
                 }
             });
         });
-    }, 
+    },
     error:function(a,b,c){}
-}); 
+});
 
 
 
-                    
+

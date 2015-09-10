@@ -28,7 +28,6 @@
     <link rel="stylesheet" href="css/myticket.css" />
     <link rel="stylesheet" href="css/remodal-default-theme.css">
     <link rel="stylesheet" href="css/remodal.css">
-
 </head>
 
 <body style="overflow:auto;height:100%">
@@ -92,7 +91,7 @@
                
             </div>
             <div class='bodv'>
-                <img src="images/botimg.png">
+              
             </div>
             <div style="text-align:center">
                 <button id="btnc1" style="font-weight:bold;font-size:20px;background-color:#ff30a4;width:80%" >关闭</button>
@@ -135,7 +134,7 @@
                 
             </div>
             <div class='bodv'>
-                <img src="images/botimg.png">
+                
             </div>
             <div style="text-align:center">
                 <button  id="btnc2" style="font-weight:bold;font-size:20px;background-color:#ff30a4;width:80%">关闭</button>
@@ -178,7 +177,7 @@
                 
             </div>
             <div class='bodv'>
-                <img src="images/botimg.png">
+                
             </div>
             <div style="text-align:center">
                 <button  id="btnc3" style="font-weight:bold;font-size:20px;background-color:#ff30a4;width:80%">关闭</button>
@@ -221,7 +220,7 @@
                 
             </div>
             <div class='bodv'>
-                <img src="images/botimg.png">
+               
             </div>
             <div style="text-align:center">
                 <button id="btnc4" style="font-weight:bold;font-size:20px;background-color:#ff30a4;width:80%">关闭</button>
@@ -257,6 +256,8 @@
     </div>
 </script>
 <script>
+
+
     var modalInstance=null;
     var tdata = null;
     wexinoptions = {
@@ -344,10 +345,10 @@
                     });
     }
 
-    function createEwm(activityid,eid){
+    function createEwm(code,eid){
         if($("#"+eid).children().length==0){
             //设置内容为当前url路径
-            qrCode.jsonData.content =  "http://www.baidu.com/?openId="+openId+"&activityid="+activityid;
+            qrCode.jsonData.content =  "http://h5.a.rongyi.com/html/legend/dnyyj/verification.html?code="+code;
             //设置宽度尺寸
             qrCode.jsonData.w =  100;
             //设置外边框距
@@ -388,7 +389,7 @@
                if(t.wt_activityid==1){
                     if(t.status==1){
                         $("#dpn1").show();
-                        createEwm(1,"ewm_dpn");
+                        createEwm(t.wt_code,"ewm_dpn");
                     }else{
                         showCj();
                     }
@@ -409,7 +410,7 @@
                if(t.wt_activityid==2){
                     if(t.status==1){
                         $("#dpn2").show();
-                         createEwm(2,"ewm_exit");
+                         createEwm(t.wt_code,"ewm_exit");
                     }else{
                         showCj();
                     }
@@ -432,9 +433,8 @@
                if(t.wt_activityid==3){
 
                     if(t.status==1){
-                        
                         $("#dpn3").show();
-                        createEwm(3,"ewm_ann");
+                        createEwm(t.wt_code,"ewm_ann");
                     }else{
                         showCj();
                     }
@@ -454,7 +454,7 @@
                if(t.wt_activityid==4){
                     if(t.status==1){
                         $("#dpn4").show();
-                        createEwm(4,"ewm_xtp");
+                        createEwm(t.wt_code,"ewm_xtp");
                     }else{
                         showCj();
                     }
@@ -462,16 +462,24 @@
                }
             }
         });
-        
-        $.ajax({
+
+         //openId = "o8OK2jppuieOX8XTO9INGq6NE5p4";
+         $.ajax({
               url: "http://h5.a.rongyi.com/pactivity/ticket/web/index.php?r=weixin%2Fmyticket",
               dataType: 'json',
               type:"post",
               timeout: 8000,  
               data: "wt_openid="+openId,
               success: function(data) {
+                console.log(data);
                 var tn = 0;
-                tdata = data; 
+                tdata = data;
+                for(var i=0;i<tdata.length;i++){
+                    var d = tdata[i];
+                    if(typeof(d.wt_code)!="undefined"){
+                        $("#dpn"+d.wt_activityid).find(".bodv").html("门票号码:<span style='color:#000;text-decoration: none;'>"+d.wt_code+"&nbsp;<span>");
+                    }
+                }
             }
         });
 });
