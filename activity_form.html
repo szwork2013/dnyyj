@@ -139,6 +139,7 @@
         padding-bottom: 10px;
         border-bottom: 1px solid #ddd;
     }
+
     </style>
 </head>
 
@@ -159,7 +160,7 @@
                     <i class="icon icon-phone"></i>
                 </label>
                 <span>
-                    <input id="user-phone-num" type="text" placeholder="请输入您的手机号">
+                    <input id="user-phone-num" type="number" placeholder="请输入您的手机号">
                 </span>
                 <button id="security-code-btn" class="security-code-btn">获取验证码</button>
             </div>
@@ -168,7 +169,7 @@
                     <i class="icon icon-cycle">123</i>
                 </label>
                 <span>
-                <input id="security-code" type="text" placeholder="请输入您的验证码">
+                <input id="security-code" type="number" placeholder="请输入您的验证码">
                 </span>
             </div>
             <button id="rob-ticket-submit" class="submit-btn">开始抢票</button>
@@ -364,12 +365,19 @@ $(function() {
             .text(second + 's');
     }
 
-    $('input').focus(function(e) {
+    $('input').keydown(function(event) {
+        if(event.keyCode === 32) return false;
+    }).focus(function(e) {
         $('body').css('background-size', '100%');
+    }).blur(function(e) {
+        $('body').css('background-size', '100% 100%');
     });
 
-    $('input').blur(function(e) {
-        $('body').css('background-size', '100% 100%');
+    $('input[type="number"]').keypress(function(event) {
+        var val = $.trim($(this).val());
+        if(val.length > 10) {
+            return false;
+        }
     });
 
 });

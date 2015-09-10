@@ -52,13 +52,14 @@
         <div id="usedinfo" style="margin-top:40%;text-align:center;display:none">
           
              <div style="text-align:center">
-                <img style='width:40%' src='images/ndmpydh.png'>
+                <img style='width:40%' id='msgimg' src='images/ndmpydh.png'>
              </div>
-             <button id='jxbtn' style='background-color:#ff30a4;margin-top:20%;width:80%'>
+             <button id='closebtn' style='background-color:#ff30a4;margin-top:10%;width:80%'>
                 关闭
              </button>
             
         </div>
+        
     </div>
 
     <div id="modal">
@@ -81,6 +82,15 @@
 
     $(document).ready(function(){
         var code = getQueryString("code");
+
+        $("#closebtn").click(function(){
+            WeixinJSBridge.invoke('closeWindow',{},function(res){
+
+                //alert(res.err_msg);
+
+            });
+        });
+
         $("#vbtn").click(function(){
             $.ajax({
                   url: "http://h5.a.rongyi.com/pactivity/ticket/web/index.php?r=weixin%2Fexchangecode",
@@ -116,8 +126,15 @@
                         }else if(data.wt_activityid==4){
                             $("#dhbtn3").show();
                         }
-                    }else{
+                    }else if(data.wt_status==2){
                         $("#usedinfo").show();
+                        $("#msgimg").attr("src",__uri("images/mpbcz.png"));
+                    }else if(data.wt_status==3){
+                        $("#usedinfo").show();
+                        $("#msgimg").attr("src",__uri("images/ndmpydh.png"));
+                    }else if(data.wt_status==4){
+                        $("#usedinfo").show();
+                        $("#msgimg").attr("src",__uri("images/ndmpygq.png"));
                     }
                   }
              });

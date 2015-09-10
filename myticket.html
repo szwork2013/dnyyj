@@ -11,6 +11,7 @@
     <meta property="og:type" content="Website">
     <meta property="og:description" content="">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+    <meta name="format-detection" content="telephone=no" />
     <meta http-equiv="cache-control" content="max-age=0" />
     <meta http-equiv="cache-control" content="no-cache" />
     <meta http-equiv="expires" content="0" />
@@ -345,14 +346,18 @@
                     });
     }
 
-    function createEwm(code,eid){
+    function createEwm(code,eid,status){
         if($("#"+eid).children().length==0){
+
             //设置内容为当前url路径
             qrCode.jsonData.content =  "http://h5.a.rongyi.com/html/legend/dnyyj/verification.html?code="+code;
             //设置宽度尺寸
             qrCode.jsonData.w =  100;
             //设置外边框距
             qrCode.jsonData.m =  5;
+            if(status==3){
+                qrCode.jsonData.fgColor="888888";
+            }
             //在id为qrcode的元素下生成二维码图片
             qrCode.getQrcode(eid);
         }
@@ -387,9 +392,9 @@
             for(var i=0;i<tdata.length;i++){
                var t = tdata[i];
                if(t.wt_activityid==1){
-                    if(t.status==1){
+                    if(t.status!=2){
                         $("#dpn1").show();
-                        createEwm(t.wt_code,"ewm_dpn");
+                        createEwm(t.wt_code,"ewm_dpn",t.status);
                     }else{
                         showCj();
                     }
@@ -408,9 +413,10 @@
             for(var i=0;i<tdata.length;i++){
                var t = tdata[i];
                if(t.wt_activityid==2){
-                    if(t.status==1){
+
+                    if(t.status!=2){
                         $("#dpn2").show();
-                         createEwm(t.wt_code,"ewm_exit");
+                         createEwm(t.wt_code,"ewm_exit",t.status);
                     }else{
                         showCj();
                     }
@@ -432,9 +438,9 @@
                var t = tdata[i];
                if(t.wt_activityid==3){
 
-                    if(t.status==1){
+                    if(t.status!=2){
                         $("#dpn3").show();
-                        createEwm(t.wt_code,"ewm_ann");
+                        createEwm(t.wt_code,"ewm_ann",t.status);
                     }else{
                         showCj();
                     }
@@ -452,9 +458,9 @@
             for(var i=0;i<tdata.length;i++){
                var t = tdata[i];
                if(t.wt_activityid==4){
-                    if(t.status==1){
+                    if(t.status!=2){
                         $("#dpn4").show();
-                        createEwm(t.wt_code,"ewm_xtp");
+                        createEwm(t.wt_code,"ewm_xtp",t.status);
                     }else{
                         showCj();
                     }

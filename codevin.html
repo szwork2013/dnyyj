@@ -33,9 +33,11 @@
 <body style="overflow:auto;height:100%">
     <div class='mt-container' style="overflow:auto;width:100%;position:relative">
         <div  style="height:67%;margin-top:40%;text-align:center">
-            <div style="width:80%;margin:auto"><input style="height:38px;border:1px solid #aaa;float:left;width:65%;padding:0px;">
-            <button id='jxbtn' style='background-color:#ff30a4;width:30%;float:left'>确认</button>
-            </div>
+            <div style="width:80%;margin:auto;border: 1px solid #ff30a4;overflow:auto">
+              <div style="float:left;" class="cin"><input id='codeinput' style="height:38px;border:0px;width:100%;padding:0px;border-radius:0px;imeMode:disabled">
+              </div>
+              <button id='confirmbtn' style='background-color:#ff30a4;width:90px;float:left'>确认</button>
+              </div>
             <div>
               <button id='jxbtn' style='background-color:#ff30a4;margin-top:20%;width:80%'>
                 关闭
@@ -43,66 +45,55 @@
            </div>
         </div>
     </div>
-    <div id="modal">
+   <div data-remodal-id="modal" class="msg-alert" role="dialog" aria-labelledby="modalTitle" aria-describedby="modalDesc">
+        <p id="msg"></p>
+        <button data-remodal-action="confirm" class="remodal-confirm msg-alert-confirm">确定</button>
     </div>
+
 </body>
 
 <script>
+    var modal = null;
 
-    /**
-     * 
-     * 获取查询值
-     */
-    function getQueryString(name) {
-        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
-        var r = window.location.search.substr(1).match(reg);
-        if (r != null) return unescape(r[2]); 
-        return null;
+    function Modal(opts) {
+        if (typeof Modal.instance === 'object') {
+            return Modal.instance;
+        }
+        this.$el = opts && opts.$el || $("[data-remodal-id='modal']");
+        this.modalInstance = null;
+        Modal.instance = this;
+    }
+
+    Modal.prototype.open = function(msg) {
+        this.modalInstance && this.destroy();
+        this.modalInstance = this.$el.find('#msg').text(msg).end().remodal({
+            closeOnOutsideClick: false,
+            hashTracking: false
+        });
+        this.modalInstance.open();
+        $('.remodal-overlay').css('background-color', 'rgba(0, 0, 0, 0.3)');
+    };
+
+    Modal.prototype.destroy = function() {
+        this.modalInstance.destroy();
     }
 
     $(document).ready(function(){
-        var code = getQueryString("code");
-        $("#vbtn").click(function(){
-            $.ajax({
-                  url: "http://h5.a.rongyi.com/pactivity/ticket/web/index.php?r=weixin%2Fexchangecode",
-                  dataType: 'json',
-                  type:"post",
-                  timeout: 8000,  
-                  data: "wt_code="+code,
-                  success: function(data) {
-                    if(data.status==1){
-                        $("#vbtn").html("已兑换");
-                        $("#modal").show();
-                    }
-                  }});
+
+        $("#confirmbtn").click(function(){
+            var code = $("#codeinput").val();
+            code = $.trim(code);
+            modal = new Modal();
+
+            if(code.length==0){
+                modal.open("请输入门票号码");
+                return;
+            }
+             
+            window.location.href="verification.html?code="+code;
+           
         });
 
-        if(code){
-             $.ajax({
-                  url: "http://h5.a.rongyi.com/pactivity/ticket/web/index.php?r=weixin%2Fcodestatus",
-                  dataType: 'json',
-                  type:"post",
-                  timeout: 8000,  
-                  data: "wt_code="+code,
-                  success: function(data) {
-                    
-                    if(data.wt_status==1){
-                        $("#maindv").show();
-                        if(data.wt_activityid==1){
-                            $("#dhbtn1").show();
-                        }else if(data.wt_activityid==2){
-                            $("#dhbtn2").show();
-                        }else if(data.wt_activityid==3){
-                            $("#dhbtn3").show();
-                        }else if(data.wt_activityid==4){
-                            $("#dhbtn3").show();
-                        }
-                    }else{
-                        $("#usedinfo").show();
-                    }
-                  }
-             });
-        }
     });
 
 </script>

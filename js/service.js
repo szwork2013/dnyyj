@@ -7,6 +7,7 @@ var service = {
     getSecurityCodeUrl: 'http://h5.a.rongyi.com/pactivity/ticket/web/index.php?r=weixin%2Fcode',
     startRobTicketUrl: 'http://h5.a.rongyi.com/pactivity/ticket/web/index.php?r=weixin%2Fregister',
     visitCountUrl: 'http://h5.a.rongyi.com/pactivity/ticket/web/index.php?r=weixin%2Fclick',
+    userLotteryCountUrl: 'http://h5.a.rongyi.com/pactivity/ticket/web/index.php?r=weixin%2Fgetuserinfo',
 
     ajax: function(opts) {
         var data = opts.data,
@@ -106,6 +107,13 @@ var service = {
         service.ajax({
             url: service.visitCountUrl,
             data: "wc_type=" + type
+        });
+    },
+
+    userLotteryCount: function(onSuccess) {
+        service.ajax({
+            url: service.userLotteryCountUrl,
+            onSuccess: onSuccess
         });
     }
 };
