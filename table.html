@@ -6,8 +6,8 @@
     <title>大宁商业国际广场</title>
     <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
-    <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="//cdn.bootcss.com/mustache.js/2.1.3/mustache.min.js"></script>
+    <script src="//cdn.bootcss.com/underscore.js/1.8.3/underscore-min.js"></script>
     <script src="js/service.js"></script>
     <style>
     .loading {
@@ -40,11 +40,16 @@
     <div class="btn-ctn">
         <a id="user-lottery-count" class="btn btn-default btn-primary" href="#" role="button">用户抽奖次数统计</a>
         <a id="page-count" class="btn btn-default" href="#" role="button">页面统计</a>
+        &nbsp;|&nbsp;
+        <a id="export-table" class="btn btn-info" href="http://h5.a.rongyi.com/pactivity/ticket/web/index.php?r=weixin%2Fexcel&type=1" role="button">导出表格1</a>
+        <a id="export-table" class="btn btn-info" href="http://h5.a.rongyi.com/pactivity/ticket/web/index.php?r=weixin%2Fexcel&type=2" role="button">导出表格2</a>
+        &nbsp;|&nbsp;
+        <button id="auto-refresh" class="btn btn-default" title="每10s刷新一次表格">自动刷新(<span>off</span>)</button>
     </div>
     <div id="table-ctn"></div>
 
     <script id="userTableTpl" type="template">
-        <div class="row col-md-4">
+        <div id="user-table-ctn" class="row col-md-4">
             <h4>用户抽奖次数统计表</h4>
             <table class="table table-hover">
                 <thead>
@@ -54,7 +59,7 @@
                         <th data-field="price">抽奖次数</th>
                     </tr>
                 </thead>
-                <tbody id="userLotteyTbody">
+                <tbody>
                     {{#userLotteryList}}
                     <tr>
                         <td>{{wu_name}}</td>
@@ -67,14 +72,16 @@
         </div>
     </script>
     <script id="pageCountTpl" type="template">
-        <div class="row col-md-12">
+        <div id="page-count-ctn" class="row col-md-12">
             <h4>页面统计表</h4>
             <table class="table table-bordered table-hover">
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>宣传H5点击次数</th>
-                        <th>抽奖H5点击次数</th>
+                        <th>宣传H5访问次数</th>
+                        <th>抽奖H5访问次数</th>
+                        <th>宣传H5分享次数</th>
+                        <th>抽奖H5分享次数</th>
                         <th>戴佩妮场次抽奖次数</th>
                         <th>EXIT场次抽奖次数</th>
                         <th>安来宁抽奖次数</th>
@@ -83,26 +90,17 @@
                         <th>EXIT门票已发数量</th>
                         <th>安来宁门票已发数量</th>
                         <th>熊天平门票已发数量</th>
-                        <th>宣传H5分享次数</th>
-                        <th>抽奖H5分享次数</th>
                     </tr>
                 </thead>
                 <tbody>
+                    {{#pageCountData}}
                     <tr>
-                        <td>9月16日</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>1</td>
+                        <td>{{date}}</td>
+                        {{#row}}
+                        <td>{{count}}</td>
+                        {{/row}}
                     </tr>
+                    {{/pageCountData}}
                 </tbody>
             </table>
         </div>
@@ -114,6 +112,8 @@
     </script>
     <script>
     $(function() {
+        var isAutoRefresh = false,
+            timer = null;
         getUserLotteryCount();
 
         $('#user-lottery-count').click(function(e) {
@@ -124,13 +124,50 @@
             setbtnStyle.call(this) && getPageCount();
         });
 
+        $('#auto-refresh').click(function(e) {
+            var $this = $(this),
+                $txt = $this.find('span'),
+                className = 'active',
+                isActive = $this.hasClass(className);
+            isActive ? function() {
+                $this.removeClass(className).find('span').text('off');
+                clearInterval(timer);
+            }() : function() {
+                $this.addClass(className).find('span').text('on');
+                isAutoRefresh = true;
+            }();
+            !isActive && startAutoRefresh();
+        });
+
+        function getCurrentTableReq() {
+            var $table = $('#table-ctn > div'),
+                tableId = $table.attr('id');
+            switch (tableId) {
+                case 'page-count-ctn':
+                    return getPageCount;
+                    break;
+                case 'user-table-ctn':
+                    return getUserLotteryCount;
+                    break;
+                default:
+                    return null;
+                    break;
+            }
+        }
+
+        function startAutoRefresh() {
+            timer = setInterval(function() {
+                getCurrentTableReq() && getCurrentTableReq()();
+            }, 10000);
+        }
+
         function setbtnStyle() {
             var $this = $(this),
                 className = 'btn-primary',
                 hasClass = $this.hasClass(className);
 
             if(!hasClass) {
-                $this.addClass(className).siblings().removeClass(className);
+                $this.addClass(className).siblings('a').removeClass(className);
                 return true;
             } else {
                 return false;
@@ -153,9 +190,20 @@
             service.pageCount(function() {
                 loadingStart();
             }, function(data) {
-                renderPageCountTable();
+                var newData = refactorData(data);
+                renderPageCountTable({
+                    pageCountData: newData
+                });
             }, function() {
                 loadingDone();
+            });
+        }
+
+        function refactorData(data) {
+            return _.sortBy(data, function(rowDataObj) {
+                return _.sortBy(rowDataObj.row, function(colDataObj) {
+                    return colDataObj.type;
+                });
             });
         }
 

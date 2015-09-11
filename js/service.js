@@ -8,7 +8,7 @@ var service = {
     startRobTicketUrl: 'http://h5.a.rongyi.com/pactivity/ticket/web/index.php?r=weixin%2Fregister',
     visitCountUrl: 'http://h5.a.rongyi.com/pactivity/ticket/web/index.php?r=weixin%2Fclick',
     userLotteryCountUrl: 'http://h5.a.rongyi.com/pactivity/ticket/web/index.php?r=weixin%2Fgetuserinfo',
-    pageCountUrl: '',
+    pageCountUrl: 'http://h5.a.rongyi.com/pactivity/ticket/web/index.php?r=weixin%2Fgetclick',
 
     ajax: function(opts) {
         var data = opts.data,
@@ -16,10 +16,11 @@ var service = {
             onSuccess = opts.onSuccess,
             onError = opts.onError,
             onComplete = opts.onComplete,
-            url = opts.url;
+            url = opts.url,
+            type = opts.type;
         $.ajax({
             url: url,
-            type: 'POST',
+            type: type || 'POST',
             dataType: 'json',
             data: data,
             beforeSend: function() {
@@ -127,5 +128,5 @@ var service = {
             onBefore: onBefore,
             onComplete: onComplete
         });
-    },
+    }
 };

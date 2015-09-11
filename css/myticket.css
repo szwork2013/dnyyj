@@ -113,3 +113,6 @@
 	width: -webkit-calc(100% - 90px);
 	height: 40px;
 }
+.ewmgray{
+	-webkit-opacity:0.2;
+}

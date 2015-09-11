@@ -23,8 +23,9 @@ var qrCode = {
         $("#"+divId).append(imgHtml);*/
     },
     //构造图片
-    setImgHeml:function(jsonData){
-        var imgHtml = "<img src='http://qr.liantu.com/api.php?";
+    setImgHeml:function(jsonData){ 
+        // var imgHtml = "<img src='http://qr.liantu.com/api.php?";
+        var imgHtml = "<img class='"+(jsonData.gray?"ewmgray":"")+"' src='https://sp0.baidu.com/5aU_bSa9KgQFm2e88IuM_a/micxp1.duapp.com/qr.php?value="+jsonData.content;
         imgHtml += jsonData.content?"&text="+jsonData.content:"";
         imgHtml += jsonData.logo?"&logo="+jsonData.logo:"";
         imgHtml += jsonData.bgColor?"&bg="+jsonData.bgColor:"";
@@ -36,6 +37,7 @@ var qrCode = {
         imgHtml += jsonData.w?"&w="+jsonData.w:"";
         imgHtml += jsonData.m?"&m="+jsonData.m:"";
         imgHtml += "'>";
+
         return imgHtml;
     }
 };
