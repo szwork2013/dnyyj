@@ -9,51 +9,183 @@
     <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="//cdn.bootcss.com/mustache.js/2.1.3/mustache.min.js"></script>
     <script src="js/service.js"></script>
+    <style>
+    .loading {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        background-color: rgba(0, 0, 0, 0.3);
+    }
+
+    .loading > p {
+        position: absolute;
+        top: 50%;
+        width: 100%;
+        height: 20px;
+        margin-top: -10px;
+        color: #fff;
+        text-align: center;
+    }
+
+    .btn-ctn {
+        margin: 10px 0;
+    }
+    </style>
 </head>
 
 <body>
-    <div>
-        <a class="btn btn-default" href="#" role="button">用户抽奖次数统计</a>
-        <a class="btn btn-default" href="#" role="button">页面统计</a>
+    <div class="btn-ctn">
+        <a id="user-lottery-count" class="btn btn-default btn-primary" href="#" role="button">用户抽奖次数统计</a>
+        <a id="page-count" class="btn btn-default" href="#" role="button">页面统计</a>
     </div>
-    <div class="row col-md-4">
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th data-field="id">姓名</th>
-                    <th data-field="name">电话号码</th>
-                    <th data-field="price">抽奖次数</th>
-                </tr>
-            </thead>
-            <tbody id="userLotteyTbody">
+    <div id="table-ctn"></div>
 
-            </tbody>
-        </table>
-    </div>
     <script id="userTableTpl" type="template">
-		{{#userLotteryList}}
-    	<tr>
-    		<td>{{wu_name}}</td>
-    		<td>{{wu_phone}}</td>
-    		<td>{{count}}</td>
-    	</tr>
-    	{{/userLotteryList}}
+        <div class="row col-md-4">
+            <h4>用户抽奖次数统计表</h4>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th data-field="id">姓名</th>
+                        <th data-field="name">电话号码</th>
+                        <th data-field="price">抽奖次数</th>
+                    </tr>
+                </thead>
+                <tbody id="userLotteyTbody">
+                    {{#userLotteryList}}
+                    <tr>
+                        <td>{{wu_name}}</td>
+                        <td>{{wu_phone}}</td>
+                        <td>{{count}}</td>
+                    </tr>
+                    {{/userLotteryList}}
+                </tbody>
+            </table>
+        </div>
+    </script>
+    <script id="pageCountTpl" type="template">
+        <div class="row col-md-12">
+            <h4>页面统计表</h4>
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>宣传H5点击次数</th>
+                        <th>抽奖H5点击次数</th>
+                        <th>戴佩妮场次抽奖次数</th>
+                        <th>EXIT场次抽奖次数</th>
+                        <th>安来宁抽奖次数</th>
+                        <th>熊天平抽奖次数</th>
+                        <th>戴佩妮门票已发数量</th>
+                        <th>EXIT门票已发数量</th>
+                        <th>安来宁门票已发数量</th>
+                        <th>熊天平门票已发数量</th>
+                        <th>宣传H5分享次数</th>
+                        <th>抽奖H5分享次数</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>9月16日</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </script>
+    <script id="loadingTpl" type="template">
+        <div class="loading">
+            <p>loading...</p>
+        </div>
     </script>
     <script>
-    	$(function() {
-			service.userLotteryCount(function(data) {
-				var userLotteryObj = {
-					userLotteryList: data
-				};
-				renderUserLotteryData(userLotteryObj);
-			});
+    $(function() {
+        getUserLotteryCount();
 
-			function renderUserLotteryData(userLotteryObj) {
-				var template = $('#userTableTpl').html();
-				var view = Mustache.render(template, userLotteryObj);
-				$('#userLotteyTbody').html(view);
-			}
-    	});
+        $('#user-lottery-count').click(function(e) {
+            setbtnStyle.call(this) && getUserLotteryCount();
+        });
+
+        $('#page-count').click(function(e) {
+            setbtnStyle.call(this) && getPageCount();
+        });
+
+        function setbtnStyle() {
+            var $this = $(this),
+                className = 'btn-primary',
+                hasClass = $this.hasClass(className);
+
+            if(!hasClass) {
+                $this.addClass(className).siblings().removeClass(className);
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        function getUserLotteryCount() {
+            service.userLotteryCount(function() {
+                loadingStart();
+            }, function(data) {
+                renderUserLotteryTable({
+                    userLotteryList: data
+                });
+            }, function() {
+                loadingDone();
+            });
+        }
+
+        function getPageCount() {
+            service.pageCount(function() {
+                loadingStart();
+            }, function(data) {
+                renderPageCountTable();
+            }, function() {
+                loadingDone();
+            });
+        }
+
+        function loadingStart() {
+            var loadingTpl = $('#loadingTpl').html(),
+                isExist = !!$('.loading').length;
+            if (isExist) return;
+            $('body').append(loadingTpl);
+        }
+
+        function loadingDone() {
+            var $loading = $('.loading');
+            $loading.remove();
+        }
+
+        function renderUserLotteryTable(data) {
+            var template = $('#userTableTpl').html();
+            render(template, data);
+        }
+
+        function renderPageCountTable(data) {
+            var template = $('#pageCountTpl').html();
+            render(template, data);
+        }
+
+        function render(template, data) {
+            var view = Mustache.render(template, data);
+            $('#table-ctn').html(view);
+        }
+    });
     </script>
 </body>
 

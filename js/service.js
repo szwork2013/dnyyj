@@ -8,6 +8,7 @@ var service = {
     startRobTicketUrl: 'http://h5.a.rongyi.com/pactivity/ticket/web/index.php?r=weixin%2Fregister',
     visitCountUrl: 'http://h5.a.rongyi.com/pactivity/ticket/web/index.php?r=weixin%2Fclick',
     userLotteryCountUrl: 'http://h5.a.rongyi.com/pactivity/ticket/web/index.php?r=weixin%2Fgetuserinfo',
+    pageCountUrl: '',
 
     ajax: function(opts) {
         var data = opts.data,
@@ -110,10 +111,21 @@ var service = {
         });
     },
 
-    userLotteryCount: function(onSuccess) {
+    userLotteryCount: function(onBefore, onSuccess, onComplete) {
         service.ajax({
             url: service.userLotteryCountUrl,
-            onSuccess: onSuccess
+            onSuccess: onSuccess,
+            onBefore: onBefore,
+            onComplete: onComplete
         });
-    }
+    },
+
+    pageCount: function(onBefore, onSuccess, onComplete) {
+        service.ajax({
+            url: service.pageCountUrl,
+            onSuccess: onSuccess,
+            onBefore: onBefore,
+            onComplete: onComplete
+        });
+    },
 };
