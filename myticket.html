@@ -91,10 +91,10 @@
                 <p>5、主办方可在法律允许的范围内对规则做适当调整。</p>
             </div>
             <div id='ewm_dpn' class="ewmimg">
-               
+
             </div>
             <div class='bodv'>
-              
+
             </div>
             <div style="text-align:center">
                 <button id="btnc1" style="font-weight:bold;font-size:20px;background-color:#ff30a4;width:80%" >关闭</button>
@@ -124,7 +124,7 @@
                     <img  src="images/tickno.png">
                     <span>规则</span>
                 </div>
-            </div> 
+            </div>
             <div style="color:#ff30a4;font-size:10px;width:80%;margin:auto;padding-left:20px;line-height:13px;display:none">
                 <div>1、本券仅作为规定场地演出内场券使用，当日有效，不得用作其他用途；</div>
                 <div>2、门票转发、截图无效。一人一张，凭票入场；</div>
@@ -134,10 +134,10 @@
                 <div>5、主办方可在法律允许的范围内对规则做适当调整。</div>
             </div>
             <div id='ewm_exit' class="ewmimg">
-                
+
             </div>
             <div class='bodv'>
-                
+
             </div>
             <div style="text-align:center">
                 <button  id="btnc2" style="font-weight:bold;font-size:20px;background-color:#ff30a4;width:80%">关闭</button>
@@ -177,10 +177,10 @@
                 <p>5、主办方可在法律允许的范围内对规则做适当调整。</p>
             </div>
             <div id='ewm_ann' class="ewmimg">
-                
+
             </div>
             <div class='bodv'>
-                
+
             </div>
             <div style="text-align:center">
                 <button  id="btnc3" style="font-weight:bold;font-size:20px;background-color:#ff30a4;width:80%">关闭</button>
@@ -220,10 +220,10 @@
                 <p>5、主办方可在法律允许的范围内对规则做适当调整。</p>
             </div>
             <div id='ewm_xtp' class="ewmimg">
-                
+
             </div>
             <div class='bodv'>
-               
+
             </div>
             <div style="text-align:center">
                 <button id="btnc4" style="font-weight:bold;font-size:20px;background-color:#ff30a4;width:80%">关闭</button>
@@ -238,24 +238,24 @@
     <div class="modal-content clear">
         <a class="activity_share"></a>
         <p style="clear:both;"></p>
-        <p>好音乐，和好朋友一起听</p>
-        <p>分享这个好消息，增加一次抽奖机会吧~</p>
+        <p>据说把好运分享给别人，运气都不会太差哦~</p>
+        <p>分享后有惊喜哦！</p>
     </div>
 </script>
 <script id="templateDpn" type="text/x-template">
     <div class="dpncontent clear">
         <a class="activity_share"></a>
         <p style="clear:both;"></p>
-        <p>好音乐，和好朋友一起听</p>
-        <p>分享这个好消息，增加一次抽奖机会吧~</p>
+        <p>据说把好运分享给别人，运气都不会太差哦~</p>
+        <p>分享后有惊喜哦！</p>
     </div>
 </script>
 <script id="templateUseout" type="text/x-template">
     <div class="dpncontent clear">
-        
+
         <p style="clear:both;"></p>
         <p style='color:#fff;margin-top:50%'>今天3次机会已经用完</p>
-        
+
     </div>
 </script>
 <script>
@@ -294,7 +294,7 @@
                               url: "  http://h5.a.rongyi.com/pactivity/ticket/web/index.php?r=weixin%2Fchance",
                               dataType: 'json',
                               type:"post",
-                              timeout: 8000,  
+                              timeout: 8000,
                               data: "wt_openid="+openId,
                               success: function(data) {
                                if(data.status==1 || data.status==2){
@@ -312,10 +312,10 @@
                                                 hashTracking: false
                                             })
                                     }else{
-                                        
+
                                     }
                                     if(data.status==1){
-                                        
+
                                     }
                                     modalInstance.open();
                                     wexinoptions.modal = modalInstance;
@@ -333,13 +333,13 @@
                                                 hashTracking: false
                                             })
                                     }else{
-                                        
+
                                     }
                                     modalInstance.open();
                                }
                             }
                         });
-                        
+
                     });
 
                     ele.find("#gbbtn").click(function(){
@@ -368,7 +368,7 @@
     }
 
     $(document).ready(function(){
-        
+
         $("#btnc1").click(function(){
             $("#dpn1").hide();
             $("#maindv").show();
@@ -407,7 +407,7 @@
         });
 
         $("#btn2").click(function(){
-            
+
             if(!tdata|| tdata.length==0){
                 showCj();
                 $("#maindv").hide();
@@ -429,8 +429,8 @@
         });
 
         $("#btn3").click(function(){
-            
-             
+
+
             if(!tdata|| tdata.length==0){
                 showCj();
                 $("#maindv").hide();
@@ -477,7 +477,7 @@
               url: "http://h5.a.rongyi.com/pactivity/ticket/web/index.php?r=weixin%2Fmyticket",
               dataType: 'json',
               type:"post",
-              timeout: 8000,  
+              timeout: 8000,
               data: "wt_openid="+openId,
               success: function(data) {
                 console.log(data);
@@ -492,8 +492,8 @@
             }
         });
 });
-        
-    
+
+
 </script>
 
 </html>
