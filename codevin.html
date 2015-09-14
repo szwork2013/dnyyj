@@ -34,12 +34,12 @@
     <div class='mt-container' style="overflow:auto;width:100%;position:relative">
         <div  style="height:67%;margin-top:40%;text-align:center">
             <div style="width:80%;margin:auto;border: 1px solid #ff30a4;overflow:auto">
-              <div style="float:left;" class="cin"><input id='codeinput' style="height:38px;border:0px;width:100%;padding:0px;border-radius:0px;imeMode:disabled">
+              <div style="float:left;" class="cin"><input id='codeinput' style="height:38px;border:0px;width:100%;padding:0px;border-radius:0px;imeMode:disabled;font-size:20px">
               </div>
               <button id='confirmbtn' style='background-color:#ff30a4;width:90px;float:left'>确认</button>
               </div>
             <div>
-              <button id='jxbtn' style='background-color:#ff30a4;margin-top:10%;width:80%'>
+              <button id='closebtn' style='background-color:#ff30a4;margin-top:10%;width:80%'>
                 关闭
              </button>
            </div>
@@ -54,6 +54,8 @@
 
 <script>
     var modal = null;
+
+
 
     function Modal(opts) {
         if (typeof Modal.instance === 'object') {
@@ -79,19 +81,22 @@
     }
 
     $(document).ready(function(){
-
         $("#confirmbtn").click(function(){
             var code = $("#codeinput").val();
             code = $.trim(code);
             modal = new Modal();
-
             if(code.length==0){
                 modal.open("请输入门票号码");
                 return;
             }
-             
+
             window.location.href="verification.html?code="+code;
-           
+        });
+
+        $("#closebtn").click(function(){
+            WeixinJSBridge.invoke('closeWindow',{},function(res){
+                
+            });
         });
 
     });

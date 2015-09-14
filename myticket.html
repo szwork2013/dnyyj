@@ -360,6 +360,8 @@
             if(status==3){
                 qrCode.jsonData.fgColor="888888";
                 qrCode.jsonData.gray=true;
+            }else{
+                 qrCode.jsonData.gray=false;
             }
             //在id为qrcode的元素下生成二维码图片
             qrCode.getQrcode(eid);

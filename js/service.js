@@ -3,7 +3,6 @@ var service = {
     isRegisterUrl: 'http://h5.a.rongyi.com/pactivity/ticket/web/index.php?r=weixin%2Fislogin',
     getTicketUrl: 'http://h5.a.rongyi.com/pactivity/ticket/web/index.php?r=weixin%2Fticket',
     wechatShareUrl: 'http://h5.a.rongyi.com/pactivity/ticket/web/index.php?r=weixin%2Fshare',
-    isRegisterUrl: 'http://h5.a.rongyi.com/pactivity/ticket/web/index.php?r=weixin%2Fislogin',
     getSecurityCodeUrl: 'http://h5.a.rongyi.com/pactivity/ticket/web/index.php?r=weixin%2Fcode',
     startRobTicketUrl: 'http://h5.a.rongyi.com/pactivity/ticket/web/index.php?r=weixin%2Fregister',
     visitCountUrl: 'http://h5.a.rongyi.com/pactivity/ticket/web/index.php?r=weixin%2Fclick',

@@ -68,7 +68,24 @@
 </body>
 
 <script>
-
+    Date.prototype.format = function(fmt)   
+    { //author: meizz   
+      var o = {   
+        "M+" : this.getMonth()+1,                 //月份   
+        "d+" : this.getDate(),                    //日   
+        "h+" : this.getHours(),                   //小时   
+        "m+" : this.getMinutes(),                 //分   
+        "s+" : this.getSeconds(),                 //秒   
+        "q+" : Math.floor((this.getMonth()+3)/3), //季度   
+        "S"  : this.getMilliseconds()             //毫秒   
+      };   
+      if(/(y+)/.test(fmt))   
+        fmt=fmt.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length));   
+      for(var k in o)   
+        if(new RegExp("("+ k +")").test(fmt))   
+      fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));   
+      return fmt;   
+    }  
     /**
      * 
      * 获取查询值
@@ -115,15 +132,36 @@
                   data: "wt_code="+code,
                   success: function(data) {
                     
+                    var activitytime = "";
                     if(data.wt_status==1){
+                        
+                        if(data.wt_activityid==1){
+                            activitytime = "2015-10-17";
+                        }else if(data.wt_activityid==2){
+                            activitytime = "2015-10-18";
+                        }else if(data.wt_activityid==3){
+                            activitytime = "2015-10-24";
+                        }else if(data.wt_activityid==4){
+                            activitytime = "2015-10-15";
+                        }
+                        var nowtime = new Date().format("yyyy-MM-dd");
+                        if(nowtime!=activitytime){
+                          $("#usedinfo").show();
+                          $("#msgimg").attr("src",__uri("images/mpwddhsj.png"));
+                          return;
+                        }     
                         $("#maindv").show();
                         if(data.wt_activityid==1){
                             $("#dhbtn1").show();
+                            activitytime = "2015-10-17";
                         }else if(data.wt_activityid==2){
+                            activitytime = "2015-10-18";
                             $("#dhbtn2").show();
                         }else if(data.wt_activityid==3){
+                            activitytime = "2015-10-24";
                             $("#dhbtn3").show();
                         }else if(data.wt_activityid==4){
+                            activitytime = "2015-10-15";
                             $("#dhbtn3").show();
                         }
                     }else if(data.wt_status==2){
